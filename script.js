@@ -174,14 +174,14 @@ function openCart(open) {
   $("#overlay").classList.toggle("show", open || !!modal);
   $("#drawer").setAttribute("aria-hidden", String(!open));
 }
-function checkout() {
-  if (!cart.length) return toast("السلة خاوية 😅");
+function checkout(e) {
+  if (!cart.length) { e.preventDefault(); return toast("السلة خاوية 😅"); }
   const name = $("#custName").value.trim(), phone = $("#custPhone").value.trim(), addr = $("#custAddr").value.trim();
-  if (!name || !phone || !addr) return toast("عمر سميتك، رقمك والعنوان 🙏");
+  if (!name || !phone || !addr) { e.preventDefault(); return toast("عمر سميتك، رقمك والعنوان 🙏"); }
   const lines = cart.map((l) => `• ${l.q} × ${byId(l.id).n}${lineDesc(l) ? ` (${lineDesc(l)})` : ""} = ${fmt(unitPrice(l) * l.q)}`).join("\n");
   const note = $("#custNote").value.trim();
   const msg = `🔥 طلب جديد — Salhiy Tboun Lmsrf9\n\n${lines}\n\n🧾 الطلب: ${fmt(subtotal())}\n🛵 التوصيل: ${delivery() ? fmt(delivery()) : "مجاني"}\n💰 المجموع: ${fmt(total())}\n\n👤 الاسم: ${name}\n📞 الهاتف: ${phone}\n📍 العنوان: ${addr}${note ? `\n📝 ملاحظة: ${note}` : ""}`;
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+  $("#checkout").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
 }
 
 /* ====== الأحداث ====== */
@@ -202,7 +202,7 @@ document.addEventListener("click", (e) => {
 $("#openCart").onclick = () => openCart(true);
 $("#closeCart").onclick = () => openCart(false);
 $("#overlay").onclick = () => { closeModal(); openCart(false); };
-$("#checkout").onclick = checkout;
+$("#checkout").addEventListener("click", checkout);
 $("#search").oninput = (e) => { query = e.target.value; renderGrid(); };
 document.addEventListener("keydown", (e) => { if (e.key === "Escape") { closeModal(); openCart(false); } });
 
