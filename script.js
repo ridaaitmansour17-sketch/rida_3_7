@@ -13,6 +13,7 @@ const CATEGORIES = [
   { id: "burger", name: "🍔 برغر" },
   { id: "sushi", name: "🍣 سوشي" },
   { id: "maroc", name: "🇲🇦 مغربي أصيل" },
+  { id: "starters", name: "🥣 شعبي ومقبلات" },
   { id: "drinks", name: "🍹 مشروبات وحلويات" },
 ];
 
@@ -27,7 +28,7 @@ const G = {
 
 const PRODUCTS = [
   // طاكوس
-  { id: 1, cat: "tacos", e: "🌮", n: "طاكوس دجاج", d: "دجاج متبل، فريت، صلصة جبن وسامورايي.", p: 35, g: G.gold, tag: "الأكثر طلباً" },
+  { id: 1, cat: "tacos", e: "🌮", n: "طاكوس دجاج", d: "دجاج متبل، فريت، صلصة جبن وسامورايي.", p: 35, g: G.gold, tag: "الأكثر طلباً", img: "tacos" },
   { id: 2, cat: "tacos", e: "🌮", n: "طاكوس كفتة", d: "كفتة مشوية، جبن شيدر، صلصة حارة.", p: 38, g: G.red },
   { id: 3, cat: "tacos", e: "🌮", n: "طاكوس ميكس XL", d: "دجاج + كفتة + نغيت، كبير وشبعان.", p: 55, g: G.brown, tag: "XL" },
   // بيتزا
@@ -39,14 +40,14 @@ const PRODUCTS = [
   { id: 8, cat: "shawarma", e: "🌯", n: "شورما لحم", d: "لحم مقدد، طحينة، خضرة طرية.", p: 38, g: G.brown },
   { id: 9, cat: "shawarma", e: "🌯", n: "طبق شورما", d: "شورما فوق البطاطس والأرز + سلطة.", p: 50, g: G.red },
   // سندويتشات
-  { id: 10, cat: "sandwich", e: "🥪", n: "سندويتش كفتة", d: "كفتة، طماطم مشوية، بصلة، هريسة.", p: 25, g: G.red },
-  { id: 11, cat: "sandwich", e: "🥪", n: "سندويتش بوليت", d: "دجاج مشوي، بطاطس، مايونيز.", p: 28, g: G.gold },
-  { id: 12, cat: "sandwich", e: "🥪", n: "سندويتش تونة", d: "تونة، بيض، زيتون، خضرة.", p: 22, g: G.blue },
+  { id: 10, cat: "sandwich", e: "🥪", n: "سندويتش كفتة", d: "كفتة، طماطم مشوية، بصلة، هريسة.", p: 25, g: G.red, img: "sandwich-kefta" },
+  { id: 11, cat: "sandwich", e: "🥪", n: "سندويتش بوليت", d: "دجاج مشوي، بطاطس، مايونيز.", p: 28, g: G.gold, img: "sandwich-poulet" },
+  { id: 12, cat: "sandwich", e: "🥪", n: "سندويتش تونة", d: "تونة، بيض، زيتون، خضرة.", p: 22, g: G.blue, img: "sandwich-tuna" },
   { id: 13, cat: "sandwich", e: "🥖", n: "باغيط مدخن", d: "ديندة مدخنة، جبن، خس.", p: 27, g: G.green },
   // برغر
   { id: 14, cat: "burger", e: "🍔", n: "تشيز برغر", d: "لحم بقري 150غ، شيدر، صلصة خاصة.", p: 42, g: G.brown },
   { id: 15, cat: "burger", e: "🍔", n: "دجاج كريسبي", d: "دجاج مقرمش، خس، صلصة حارة.", p: 40, g: G.gold, tag: "حار 🌶️" },
-  { id: 16, cat: "burger", e: "🍟", n: "فريت جبن", d: "بطاطس مقرمشة بصلصة الجبن.", p: 20, g: G.gold },
+    { id: 16, cat: "burger", e: "🍟", n: "فريت", d: "بطاطس ذهبية مقرمشة، ديما سخونة.", p: 15, g: G.gold, img: "fries" },
   // سوشي
   { id: 17, cat: "sushi", e: "🍣", n: "ساليمون رول (8 قطع)", d: "سلمون طري، أفوكادو، جبن كريمي.", p: 75, g: G.pink, tag: "فاخر" },
   { id: 18, cat: "sushi", e: "🍱", n: "بوكس سوشي ميكس (16 قطعة)", d: "تشكيلة نيغيري ومكي وكاليفورنيا.", p: 140, g: G.blue, tag: "للمشاركة" },
@@ -55,13 +56,25 @@ const PRODUCTS = [
   { id: 20, cat: "maroc", e: "🍲", n: "طاجين دجاج بالزيتون", d: "دجاج بلدي، زيتون، ليمون مصير.", p: 65, g: G.gold, tag: "بلدي" },
   { id: 21, cat: "maroc", e: "🥘", n: "كسكس بالخضرة", d: "كسكس يدوي، لحم، 7 خضاري.", p: 70, g: G.green },
   { id: 22, cat: "maroc", e: "🥧", n: "بسطيلة دجاج", d: "ورقة رقيقة، لوز، سكر وقرفة.", p: 55, g: G.brown, tag: "فاسية" },
-  { id: 23, cat: "maroc", e: "🥣", n: "حريرة", d: "حريرة سخونة مع تمر وشباكية.", p: 15, g: G.red },
-  { id: 24, cat: "maroc", e: "🫓", n: "مسمن محشي", d: "مسمن بالكفتة والجبن، مقرمش.", p: 20, g: G.gold },
+    { id: 23, cat: "starters", e: "🥣", n: "حريرة", d: "حريرة سخونة بالحمص والعدس، مع الخبز.", p: 15, g: G.red, img: "harira", tag: "ديال رمضان وديما" },
+    { id: 24, cat: "starters", e: "🫓", n: "مسمن بالعسل", d: "مسمن مقرمش مع العسل والزبدة وأتاي.", p: 12, g: G.gold, img: "msemen" },
   // مشروبات
   { id: 25, cat: "drinks", e: "🍵", n: "أتاي بالنعناع", d: "براد أتاي مغربي أصيل.", p: 12, g: G.green },
   { id: 26, cat: "drinks", e: "🍹", n: "عصير أفوكادو", d: "أفوكادو، حليب، لوز وعسل.", p: 22, g: G.green, tag: "كيفتح الشهية" },
   { id: 27, cat: "drinks", e: "🍯", n: "شباكية (500غ)", d: "شباكية بالعسل والسمسم.", p: 40, g: G.brown },
   { id: 28, cat: "drinks", e: "🍰", n: "تشيز كيك", d: "كريمي بصلصة الفراولة.", p: 28, g: G.pink },
+  { id: 29, cat: "starters", e: "🥣", n: "بيصارة", d: "بيصارة سخونة بالكمون وزيت الزيتون.", p: 15, g: G.gold, img: "bissara" },
+  { id: 30, cat: "maroc", e: "🍳", n: "شكشوكة", d: "بيض فالطماطم والفلفل والمعدنوس.", p: 30, g: G.red, img: "shakshuka" },
+  { id: 31, cat: "starters", e: "🍆", n: "زعلوك", d: "سلطة الباذنجان والطماطم المطبوخة.", p: 20, g: G.brown, img: "zaalouk" },
+  { id: 32, cat: "starters", e: "🐌", n: "ببوش", d: "ببوش بمرقتو بالتوابل، كيسخن البدن.", p: 15, g: G.brown, img: "babbouche", tag: "بلدي" },
+  { id: 33, cat: "starters", e: "🥔", n: "ماكودة (3 حبات)", d: "ماكودة بطاطس مقرمشة بالمعدنوس.", p: 12, g: G.gold, img: "maakouda" },
+  { id: 34, cat: "starters", e: "🥟", n: "بريوات (6 حبات)", d: "بريوات مقرمشة محشية بالدجاج.", p: 25, g: G.gold, img: "briouat", tag: "مقرمش" },
+  { id: 35, cat: "maroc", e: "🐟", n: "سردين مقلي بالشرمولة", d: "سردين طري مقلي مع شرمولة وليمون.", p: 40, g: G.blue, img: "sardines" },
+  { id: 36, cat: "maroc", e: "🍤", n: "كرات السمك", d: "كرات سمك مقلية مع صلصة ومايونيز.", p: 35, g: G.blue, img: "kefta-hout" },
+  { id: 37, cat: "maroc", e: "🍢", n: "بروشيت مشوية", d: "أسياخ لحم مشوية بالفحم مع خبز وحريرة.", p: 45, g: G.red, img: "brochettes", tag: "مشوي" },
+  { id: 38, cat: "maroc", e: "🍳", n: "بيض بالطماطم والزيتون", d: "بيض مقلي بالطماطم والكمون، مع الخبز.", p: 22, g: G.gold, img: "bayd" },
+  { id: 39, cat: "sandwich", e: "🥪", n: "سندويتش ماكودة", d: "ماكودة مقرمشة، هريسة، خس وبصلة.", p: 18, g: G.gold, img: "sandwich-maakouda" },
+  { id: 40, cat: "sandwich", e: "🥪", n: "بانيني تونة وجبن", d: "تونة، جبن ذايب، خيار، محمص.", p: 28, g: G.blue, img: "panini-tuna" },
 ];
 
 /* ====== الخيارات (حجم + إضافات) ====== */
@@ -75,6 +88,7 @@ const EXTRAS = {
   sandwich: [["بطاطس", 5], ["جبن", 5], ["بيض", 4]],
   sushi: [["صلصة سوجا", 3], ["واسابي", 2], ["جنجبير", 2]],
   maroc: [["خبز زيادة", 3], ["زيتون", 5]],
+  starters: [["خبز زيادة", 3], ["زيتون", 5]],
   drinks: [],
 };
 
@@ -103,6 +117,10 @@ function lineDesc(l) {
   return a.join(" + ");
 }
 
+/* ====== الصور ====== */
+const media = (p) => p.img ? `<img src="images/${p.img}.jpg" alt="${p.n}" loading="lazy">` : `<i>${p.e}</i>`;
+const thumb = (p) => p.img ? `<img class="th" src="images/${p.img}.jpg" alt="">` : p.e;
+
 /* ====== المينيو ====== */
 function renderTabs() {
   $("#tabs").innerHTML = CATEGORIES.map((c) => `<button class="tab ${c.id === activeCat ? "active" : ""}" data-cat="${c.id}">${c.name}</button>`).join("");
@@ -112,7 +130,7 @@ function renderGrid() {
   const list = PRODUCTS.filter((p) => (activeCat === "all" || p.cat === activeCat) && (!q || (p.n + p.d).includes(q)));
   $("#grid").innerHTML = list.length ? list.map((p, i) => `
     <article class="card" style="animation-delay:${i * 40}ms" data-open="${p.id}">
-      <div class="pic" style="--g:${p.g}">${p.tag ? `<span class="tag">${p.tag}</span>` : ""}<i>${p.e}</i></div>
+      <div class="pic" style="--g:${p.g}">${p.tag ? `<span class="tag">${p.tag}</span>` : ""}${media(p)}</div>
       <div class="info"><h3>${p.n}</h3><p>${p.d}</p>
         <div class="row"><span class="price">${p.p} <small>درهم</small></span><button class="add" data-open="${p.id}">+ زيد</button></div>
       </div></article>`).join("") : `<p class="sub" style="grid-column:1/-1">ما لقينا والو 😅 جرب كلمة أخرى.</p>`;
@@ -128,7 +146,7 @@ function modalPrice() { return unitPrice(modal) * modal.q; }
 function renderModal() {
   const p = byId(modal.id), ex = EXTRAS[p.cat] || [];
   $("#modalBody").innerHTML = `
-    <div class="m-pic" style="--g:${p.g}"><i>${p.e}</i></div>
+    <div class="m-pic" style="--g:${p.g}">${media(p)}</div>
     <h3>${p.n}</h3><p class="m-d">${p.d}</p>
     ${modal.size ? `<h4>الحجم</h4><div class="opts">${Object.entries(SIZES).map(([k, [n, a]]) =>
       `<button class="opt ${modal.size === k ? "on" : ""}" data-size="${k}">${n}${a ? ` <small>+${a}</small>` : ""}</button>`).join("")}</div>` : ""}
@@ -153,7 +171,7 @@ function renderCart() {
   $("#cartCount").textContent = cart.reduce((s, l) => s + l.q, 0);
   const sub = subtotal(), left = FREE_DELIVERY_OVER - sub;
   $("#cartItems").innerHTML = cart.length ? cart.map((l, i) => { const p = byId(l.id); return `
-    <div class="item"><span class="e">${p.e}</span>
+    <div class="item"><span class="e">${thumb(p)}</span>
       <div class="n">${p.n}${lineDesc(l) ? `<em>${lineDesc(l)}</em>` : ""}<small>${fmt(unitPrice(l) * l.q)}</small></div>
       <div class="qty"><button data-dec="${i}">−</button><span>${l.q}</span><button data-inc="${i}">+</button></div></div>`; }).join("")
     : `<div class="empty"><b>🍽️</b>السلة خاوية… عمرها بالمزيان!</div>`;
