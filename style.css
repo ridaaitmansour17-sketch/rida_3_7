@@ -13,8 +13,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:16px;padding:12px 5%;
   background:rgba(21,13,10,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 .brand{display:flex;align-items:center;gap:10px}
-.logo{display:grid;place-items:center;width:44px;height:44px;border-radius:14px;font-size:24px;
-  background:linear-gradient(135deg,var(--red),var(--gold));box-shadow:0 6px 20px rgba(230,60,47,.45)}
+.logo{width:46px;height:46px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);box-shadow:0 6px 20px rgba(230,60,47,.45)}
 .brand-text{display:flex;flex-direction:column;line-height:1.1;direction:ltr;text-align:left}
 .brand-text b{font-family:'Lalezar',sans-serif;font-size:22px;letter-spacing:.5px}
 .brand-text small{color:var(--gold);font-weight:800;font-size:14px;letter-spacing:2px;text-transform:uppercase}
@@ -158,3 +157,9 @@ footer{text-align:center;padding:30px 5%;color:var(--muted);border-top:1px solid
 .m-pic{position:relative;overflow:hidden}.m-pic:has(img){height:230px}
 .item .e .th{width:52px;height:52px;border-radius:12px;object-fit:cover;display:block}
 @media(max-width:640px){.pic{height:130px}}
+
+/* LOGO BACKGROUND */
+.hero-bg::before{content:"";position:absolute;inset:0;background:url(images/logo.jpg) no-repeat left 4% center/min(620px,60vw);opacity:.7;mix-blend-mode:screen;
+  -webkit-mask-image:radial-gradient(circle at 20% 50%,#000 35%,transparent 72%);mask-image:radial-gradient(circle at 20% 50%,#000 35%,transparent 72%)}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:url(images/logo.jpg) no-repeat center/min(900px,120vw);opacity:.04}
+@media(max-width:640px){.hero-bg::before{background-position:center 80%;background-size:110vw;opacity:.22;-webkit-mask-image:none;mask-image:none}}
