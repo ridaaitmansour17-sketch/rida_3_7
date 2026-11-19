@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Salhiy Tboun Lmsrf9 | متجر الماكلة</title>
+<meta name="description" content="Salhiy Tboun Lmsrf9 — طاكوس، بيتزا، شورما، سندويتشات، سوشي وأطباق مغربية. طلب ديالك وصلك حتى لباب الدار.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&family=Lalezar&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="#top">
+    <span class="logo">🔥</span>
+    <span class="brand-text"><b>Salhiy Tboun</b><small>Lmsrf9</small></span>
+  </a>
+  <nav class="links">
+    <a href="#menu">المينيو</a>
+    <a href="#why">علاش حنا</a>
+    <a href="#contact">تواصل</a>
+  </nav>
+  <button class="cart-btn" id="openCart" aria-label="السلة">🛒 <span id="cartCount">0</span></button>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <span class="badge">🇲🇦 كلشي كتحماق عليه فالمغرب</span>
+    <h1>الجوع ما كيفهمش<br><em>غير الماكلة الصحيحة</em></h1>
+    <p>طاكوس، بيتزا، شورما، سندويتشات، سوشي وحتى الأطباق المغربية الأصيلة. كلشي فبلاصة وحدة، سخون وكيوصلك لباب الدار.</p>
+    <div class="hero-cta">
+      <a href="#menu" class="btn primary">شوف المينيو 🍽️</a>
+      <a href="#contact" class="btn ghost">طلب بالواتساب</a>
+    </div>
+  </div>
+  <div class="floaters" aria-hidden="true">
+    <span style="--d:0s;--x:8%">🌮</span><span style="--d:1s;--x:22%">🍕</span>
+    <span style="--d:2s;--x:38%">🌯</span><span style="--d:.5s;--x:54%">🍣</span>
+    <span style="--d:1.5s;--x:70%">🍔</span><span style="--d:2.5s;--x:86%">🥘</span>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="track">
+    <span>🌮 طاكوس</span><span>🍕 بيتزا</span><span>🌯 شورما</span><span>🥪 سندويتشات</span><span>🍣 سوشي</span><span>🍔 برغر</span><span>🥧 بسطيلة</span><span>🍲 طاجين</span><span>🍵 أتاي</span>
+    <span>🌮 طاكوس</span><span>🍕 بيتزا</span><span>🌯 شورما</span><span>🥪 سندويتشات</span><span>🍣 سوشي</span><span>🍔 برغر</span><span>🥧 بسطيلة</span><span>🍲 طاجين</span><span>🍵 أتاي</span>
+  </div>
+</div>
+
+<main>
+  <section class="menu" id="menu">
+    <h2 class="title">المينيو ديالنا</h2>
+    <p class="sub">اختار الصنف وزيد لسلتك، وصافي!</p>
+    <div class="tabs" id="tabs"></div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="why" id="why">
+    <h2 class="title">علاش <span>Salhiy Tboun</span>؟</h2>
+    <div class="why-grid">
+      <div><b>🔥</b><h3>سخون ديما</h3><p>كنطيبو عند الطلب، ماشي من قبل.</p></div>
+      <div><b>🥩</b><h3>مواد طرية</h3><p>لحم، خضرة وصلصات كنجهزوهم نهار بنهار.</p></div>
+      <div><b>🛵</b><h3>توصيل سريع</h3><p>كيوصلك فأقل من 45 دقيقة.</p></div>
+      <div><b>💸</b><h3>ثمن معقول</h3><p>الجودة العالية بثمن فالمتناول.</p></div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2 class="title">تواصل معانا</h2>
+    <p class="sub">الطلبات كتوصل مباشرة لواتساب 📲</p>
+    <div class="contact-cards">
+      <a class="btn primary" id="waLink" href="#" target="_blank" rel="noopener">💬 واتساب</a>
+      <span class="chip">🕒 كل نهار من 11:00 حتى 01:00</span>
+      <span class="chip">📍 التوصيل لجميع الأحياء</span>
+    </div>
+  </section>
+</main>
+
+<footer>© <span id="year"></span> Salhiy Tboun Lmsrf9 — صُنع بالحب والتوابل ❤️</footer>
+
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-head"><h3>🛒 السلة ديالك</h3><button id="closeCart" aria-label="سد">✕</button></div>
+  <div class="drawer-body" id="cartItems"></div>
+  <div class="drawer-foot">
+    <input id="custName" placeholder="سميتك" autocomplete="name">
+    <input id="custPhone" placeholder="رقم التيليفون" inputmode="tel" autocomplete="tel">
+    <input id="custAddr" placeholder="العنوان ديالك" autocomplete="street-address">
+    <div class="total"><span>المجموع</span><b id="total">0 درهم</b></div>
+    <button class="btn primary full" id="checkout">أطلب عبر واتساب ✅</button>
+  </div>
+</aside>
+
+<div class="toast" id="toast"></div>
+<script src="script.js"></script>
+</body>
+</html>
