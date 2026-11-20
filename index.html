@@ -164,6 +164,25 @@ h2.title.in::after{width:70px}
 .now b{color:var(--red)}
 .old{color:var(--muted);text-decoration:line-through;font-size:.9rem}
 .sizes{display:flex;gap:6px;flex-wrap:wrap}
+.card.pack{border-color:rgba(225,6,0,.55);background:linear-gradient(160deg,rgba(225,6,0,.12),var(--card) 40%,rgba(30,107,255,.12))}
+.card.pack::after{content:"";position:absolute;inset:-2px;border-radius:20px;padding:2px;background:conic-gradient(from var(--a,0deg),var(--red),transparent 30%,var(--blue),transparent 70%,var(--red));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:spinBorder 4s linear infinite;pointer-events:none;z-index:3}
+@property --a{syntax:"<angle>";inherits:false;initial-value:0deg}
+@keyframes spinBorder{to{--a:360deg}}
+.combo{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#111118;place-items:stretch}
+.combo .half{position:relative;overflow:hidden}
+.combo .half img,.combo .half svg{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.combo .half:first-child{animation:inL .8s var(--ease) both}
+.combo .half:nth-child(2){animation:inR .8s var(--ease) both}
+.combo.swap .half:first-child{animation:inL .6s var(--ease) both}
+@keyframes inL{from{transform:translateX(-40%);opacity:0}}
+@keyframes inR{from{transform:translateX(40%);opacity:0}}
+.plus{position:absolute;top:50%;left:50%;width:38px;height:38px;margin:-19px 0 0 -19px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:1.5rem;color:#fff;background:linear-gradient(135deg,var(--red),var(--blue));box-shadow:0 0 0 4px var(--card),0 6px 18px rgba(0,0,0,.5);animation:plusPulse 1.6s ease-in-out infinite;z-index:1}
+@keyframes plusPulse{50%{transform:scale(1.18) rotate(90deg)}}
+.times{position:absolute;bottom:8px;inset-inline-end:8px;background:var(--blue);color:#fff;font-weight:900;padding:0 9px;border-radius:99px;font-size:.9rem}
+.pick{display:flex;flex-direction:column;gap:4px;font-size:.78rem;color:var(--muted);font-weight:700}
+.pick select{width:100%;background:var(--bg2);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:7px 8px;font:inherit;font-size:.85rem}
+.pick select:focus{outline:0;border-color:var(--blue)}
+.save{display:inline-block;align-self:flex-start;font-size:.78rem;font-weight:800;color:#25D366;background:rgba(37,211,102,.12);padding:1px 10px;border-radius:99px}
 .size{min-width:38px;padding:4px 10px;border-radius:8px;background:var(--bg2);border:1px solid var(--line);font-weight:700;font-size:.85rem;transition:all .2s}
 .size:hover{border-color:var(--blue)}
 .size.on{background:var(--blue);border-color:var(--blue);color:#fff;transform:scale(1.08)}
@@ -314,6 +333,7 @@ footer small{color:var(--muted)}
       <div class="tabs reveal" id="tabs">
         <span class="pill" id="pill"></span>
         <button class="tab active" data-f="all" data-t="all">All</button>
+        <button class="tab" data-f="packs" data-t="packs">Packs 🎁</button>
         <button class="tab" data-f="gloves" data-t="gloves">Gloves</button>
         <button class="tab" data-f="masks" data-t="masks">Masks</button>
         <button class="tab" data-f="offers" data-t="offers">Offers 🔥</button>
@@ -435,6 +455,19 @@ const PRODUCTS = [
    desc:{en:"Warm, windproof and breathable fleece. Covers the neck too.", ar:"دافي، ضد الريح وكيتنفس. كيغطي حتى العنق."}}
 ];
 
+/* ================= PACKS (bundles) =================
+   The customer picks the gloves model + size; masks are added automatically.
+   Price = gloves price + masks price − discount   (old price shown = without discount)
+   maskId: which product is the mask   gloves: which gloves can be chosen ([] = all gloves) */
+const PACKS = [
+  {id:"p1", masks:1, discount:29, maskId:7, gloves:[],
+   name:{en:"Pack: Gloves + Mask", ar:"باك: قفازات + قناع"},
+   desc:{en:"Choose your gloves and get a balaclava with them — save more.", ar:"اختار القفازات اللي بغيتي وخود معاهم قناع — وفّر أكثر."}},
+  {id:"p2", masks:2, discount:58, maskId:7, gloves:[],
+   name:{en:"Pack: Gloves + 2 Masks", ar:"باك: قفازات + 2 أقنعة"},
+   desc:{en:"Gloves plus two balaclavas — one for you, one for your passenger.", ar:"قفازات مع جوج أقنعة — واحد ليك وواحد للي راكب موراك."}}
+];
+
 /* ================= TEXTS ================= */
 const T = {
   en:{
@@ -442,10 +475,10 @@ const T = {
     heroSub:"Gear up with premium sport riding gloves and masks. Delivered to your door anywhere in Morocco.",
     cta:"Shop now 🏍️", cta2:"💬 Order on WhatsApp",
     b1:"🚚 Free delivery to all cities", b2:"💵 Cash on delivery", b3:"🔄 Exchange available",
-    mq1:["FREE DELIVERY","CASH ON DELIVERY","EXCHANGE AVAILABLE","TOUCHSCREEN COMPATIBLE","H.R MOTO"],
+    mq1:["PACKS: GLOVES + MASK","CASH ON DELIVERY","EXCHANGE AVAILABLE","TOUCHSCREEN COMPATIBLE","H.R MOTO"],
     mq2:["REAL PROTECTION","BREATHABLE FABRIC","GUARANTEED QUALITY","RIDE IN STYLE","ALL OF MOROCCO"],
     shopTitle:"Our Products", shopSub:"Pick your size and add to cart",
-    all:"All", gloves:"Gloves", masks:"Masks", offers:"Offers 🔥",
+    all:"All", packs:"Packs 🎁", gloves:"Gloves", masks:"Masks", offers:"Offers 🔥", pickGloves:"Choose your gloves", save:"Save", packTag:"PACK", mask:"Mask",
     add:"🛒 Add to cart", added:"✓ Added", toast:"Added to cart ✅", empty:"No products here.",
     whyTitle:"Why choose H.R MOTO?", whySub:"Gear built for speed and safety",
     f1:"Real protection", f1d:"Reinforced knuckles and palm to keep you safe on every road.",
@@ -469,10 +502,10 @@ const T = {
     heroSub:"جهّز يديك ووجهك بأحسن معدات الموطور السبور. كيوصلك حتى لباب الدار فالمغرب كامل.",
     cta:"تسوق دابا 🏍️", cta2:"💬 اطلب فواتساب",
     b1:"🚚 توصيل مجاني لجميع المدن", b2:"💵 الدفع عند الاستلام", b3:"🔄 التبديل متاح",
-    mq1:["توصيل مجاني","الدفع عند الاستلام","التبديل متاح","كيخدم مع التاتش","H.R MOTO"],
+    mq1:["باكات: قفازات + قناع","الدفع عند الاستلام","التبديل متاح","كيخدم مع التاتش","H.R MOTO"],
     mq2:["حماية حقيقية","قماش كيتنفس","جودة مضمونة","ركب بستايل","المغرب كامل"],
     shopTitle:"منتجاتنا", shopSub:"اختار المقاس وزيد للسلة",
-    all:"الكل", gloves:"القفازات", masks:"الأقنعة", offers:"العروض 🔥",
+    all:"الكل", packs:"الباكات 🎁", gloves:"القفازات", masks:"الأقنعة", offers:"العروض 🔥", pickGloves:"اختار القفازات", save:"وفّر", packTag:"باك", mask:"قناع",
     add:"🛒 زيد للسلة", added:"✓ تزاد", toast:"تزاد للسلة ✅", empty:"ما كاين حتى منتج هنا.",
     whyTitle:"علاش تختار H.R MOTO؟", whySub:"معدات صنعات للسرعة والأمان",
     f1:"حماية حقيقية", f1d:"تقوية فالمفاصل والكف باش تكون محمي فكل طريق.",
@@ -523,6 +556,21 @@ const chosen = {};
 const t = k => T[lang][k];
 const fmt = n => `${n.toLocaleString("en-US")} ${t("cur")}`;
 const find = id => PRODUCTS.find(p => p.id === id);
+const findPack = id => PACKS.find(k => k.id === id);
+const packGloves = k => PRODUCTS.filter(p => p.cat === "gloves" && (!k.gloves.length || k.gloves.indexOf(p.id) > -1));
+const packG = {};   // chosen gloves per pack
+function packPrice(k, g){ const m = find(k.maskId); const full = g.price + m.price * k.masks; return {price: full - k.discount, old: full}; }
+/* resolve any cart line (product or pack) */
+function lineInfo(i){
+  if(typeof i.id === "string"){
+    const k = findPack(i.id), g = k && find(i.g), m = k && find(k.maskId);
+    if(!k || !g || !m) return null;
+    return {name:k.name[lang], price:packPrice(k,g).price, thumb:media(g),
+            detail:`${g.name[lang]}${i.s ? " (" + i.s + ")" : ""} + ${k.masks}× ${t("mask")}`};
+  }
+  const p = find(i.id); if(!p) return null;
+  return {name:p.name[lang], price:p.price, thumb:media(p), detail:i.s ? `${t("size")}: ${i.s}` : ""};
+}
 
 /* ================= Language ================= */
 function applyLang(){
@@ -547,9 +595,30 @@ function applyLang(){
 }
 
 /* ================= Products ================= */
+function packCard(k, i){
+  const opts = packGloves(k); if(!opts.length) return "";
+  if(!packG[k.id] || !find(packG[k.id])) packG[k.id] = opts[0].id;
+  const g = find(packG[k.id]), m = find(k.maskId), pr = packPrice(k, g);
+  if(g.sizes.length && g.sizes.indexOf(chosen[k.id]) < 0) chosen[k.id] = g.sizes[0];
+  return `<article class="card pack" data-card="${k.id}" style="animation-delay:${i*.08}s">
+    <div class="pic combo"><div class="half">${media(g)}</div><div class="half">${media(m)}${k.masks > 1 ? `<span class="times">×${k.masks}</span>` : ""}</div>
+      <span class="plus">+</span><span class="tag">${t("packTag")} -${k.discount} ${t("cur")}</span></div>
+    <div class="info">
+      <h3>${k.name[lang]}</h3>
+      <p>${k.desc[lang]}</p>
+      <label class="pick"><span>${t("pickGloves")}</span>
+        <select data-pack="${k.id}">${opts.map(o => `<option value="${o.id}" ${o.id===g.id?"selected":""}>${o.name[lang]}</option>`).join("")}</select></label>
+      <div class="price"><span class="now"><b>${pr.price}</b> ${t("cur")}</span><span class="old">${pr.old} ${t("cur")}</span></div>
+      <div class="save">${t("save")} ${k.discount} ${t("cur")} 🎉</div>
+      ${g.sizes.length ? `<div class="sizes" data-id="${k.id}">${g.sizes.map(z => `<button class="size ${chosen[k.id]===z?"on":""}" data-s="${z}">${z}</button>`).join("")}</div>` : ""}
+      <button class="add" data-add="${k.id}">${t("add")}</button>
+    </div></article>`;
+}
 function renderGrid(){
-  const list = PRODUCTS.filter(p => filter === "all" || (filter === "offers" ? p.old : p.cat === filter));
-  $("#grid").innerHTML = list.length ? list.map((p,i) => {
+  const packs = (filter === "all" || filter === "packs" || filter === "offers") ? PACKS.map((k,i) => packCard(k,i)).join("") : "";
+  const list = filter === "packs" ? [] : PRODUCTS.filter(p => filter === "all" || (filter === "offers" ? p.old : p.cat === filter));
+  const off0 = packs ? PACKS.length : 0;
+  $("#grid").innerHTML = (packs || list.length) ? packs + list.map((p,i) => { i += off0;
     const off = p.old ? Math.round((1 - p.price / p.old) * 100) : 0;
     if(p.sizes.length && !chosen[p.id]) chosen[p.id] = p.sizes[0];
     return `<article class="card" style="animation-delay:${i*.08}s">
@@ -587,19 +656,19 @@ function movePill(){
 
 /* ================= Cart ================= */
 function save(){ try{ localStorage.setItem("hrmoto_cart", JSON.stringify(cart)); }catch(e){} }
-const total = () => cart.reduce((s,i) => s + ((find(i.id)||{}).price || 0) * i.q, 0);
+const total = () => cart.reduce((s,i) => { const L = lineInfo(i); return s + (L ? L.price * i.q : 0); }, 0);
 function renderCart(bump){
-  cart = cart.filter(i => find(i.id));
+  cart = cart.filter(i => lineInfo(i));
   const n = cart.reduce((s,i) => s + i.q, 0), c = $("#count");
   c.textContent = n;
   if(bump){ c.classList.remove("bump"); void c.offsetWidth; c.classList.add("bump"); }
   $("#foot").style.display = n ? "" : "none";
   $("#items").innerHTML = n ? cart.map((i,idx) => {
-    const p = find(i.id);
-    return `<div class="line" style="animation-delay:${idx*.05}s"><div class="th">${media(p)}</div>
-      <div class="d"><b>${p.name[lang]}</b>${i.s ? `<small>${t("size")}: ${i.s}</small>` : ""}
+    const L = lineInfo(i);
+    return `<div class="line" style="animation-delay:${idx*.05}s"><div class="th">${L.thumb}</div>
+      <div class="d"><b>${L.name}</b>${L.detail ? `<small>${L.detail}</small>` : ""}
         <div class="qty"><button data-q="-1" data-i="${idx}">−</button><span>${i.q}</span><button data-q="1" data-i="${idx}">+</button></div></div>
-      <div class="lp">${fmt(p.price * i.q)}</div></div>`;
+      <div class="lp">${fmt(L.price * i.q)}</div></div>`;
   }).join("") : `<div class="empty">${t("cartEmpty")}</div>`;
   $("#total").textContent = fmt(total());
   save();
@@ -622,9 +691,11 @@ function flyToCart(fromEl){
 }
 
 function addToCart(id, btn){
-  const p = find(id), s = p.sizes.length ? chosen[id] : "";
-  const ex = cart.find(i => i.id === id && i.s === s);
-  ex ? ex.q++ : cart.push({id, s, q:1});
+  const isPack = typeof id === "string";
+  const g = isPack ? find(packG[id]) : find(id), s = g.sizes.length ? chosen[id] : "";
+  const gid = isPack ? g.id : undefined;
+  const ex = cart.find(i => i.id === id && i.s === s && i.g === gid);
+  ex ? ex.q++ : cart.push(isPack ? {id, g:gid, s, q:1} : {id, s, q:1});
   btn.classList.add("ok"); btn.textContent = t("added");
   setTimeout(() => { btn.classList.remove("ok"); btn.textContent = t("add"); }, 1200);
   if(matchMedia("(prefers-reduced-motion:reduce)").matches) renderCart(true);
@@ -643,8 +714,15 @@ $("#tabs").addEventListener("click", e => {
 });
 $("#grid").addEventListener("click", e => {
   const s = e.target.closest(".size");
-  if(s){ const id = +s.parentElement.dataset.id; chosen[id] = s.dataset.s; s.parentElement.querySelectorAll(".size").forEach(x => x.classList.toggle("on", x === s)); return; }
-  const a = e.target.closest("[data-add]"); if(a) addToCart(+a.dataset.add, a);
+  if(s){ const id = s.parentElement.dataset.id; chosen[id] = s.dataset.s; s.parentElement.querySelectorAll(".size").forEach(x => x.classList.toggle("on", x === s)); return; }
+  const a = e.target.closest("[data-add]"); if(a){ const v = a.dataset.add; addToCart(isNaN(v) ? v : +v, a); }
+});
+$("#grid").addEventListener("change", e => {
+  const sel = e.target.closest("[data-pack]"); if(!sel) return;
+  const k = findPack(sel.dataset.pack); packG[k.id] = +sel.value;
+  const card = sel.closest(".card"), tmp = document.createElement("div");
+  tmp.innerHTML = packCard(k, 0); const nc = tmp.firstElementChild; nc.style.animation = "none";
+  card.replaceWith(nc); nc.querySelector(".combo").classList.add("swap"); bindTilt();
 });
 $("#items").addEventListener("click", e => {
   const b = e.target.closest("[data-q]"); if(!b) return;
@@ -663,7 +741,7 @@ $("#orderBtn").onclick = () => {
   if(!cart.length) return;
   if(bad){ toast(t("fill")); return; }
   let m = t("msgHead") + "\n\n";
-  cart.forEach(i => { const p = find(i.id); m += `• ${p.name[lang]}${i.s ? ` (${i.s})` : ""} × ${i.q} = ${fmt(p.price * i.q)}\n`; });
+  cart.forEach(i => { const L = lineInfo(i); m += `• ${L.name}${L.detail ? ` [${L.detail}]` : ""} × ${i.q} = ${fmt(L.price * i.q)}\n`; });
   const addr = $("#fAddr").value.trim();
   m += `\n💰 *${t("msgTotal")}:* ${fmt(total())}\n${t("msgDel")}\n${t("msgPay")}\n\n👤 ${f.name.value.trim()}\n📞 ${f.phone.value.trim()}\n📍 ${f.city.value.trim()}${addr ? " — " + addr : ""}`;
   window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(m)}`, "_blank");
