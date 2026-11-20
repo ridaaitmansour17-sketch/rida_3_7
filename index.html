@@ -1,105 +1,825 @@
 <!doctype html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Salhiy Tboun Lmsrf9 | متجر الماكلة</title>
-<meta name="description" content="Salhiy Tboun Lmsrf9 — طاكوس، بيتزا، شورما، سندويتشات، سوشي وأطباق مغربية. طلب ديالك وصلك حتى لباب الدار.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>H.R MOTO | Motorcycle Gloves & Masks</title>
+<meta name="description" content="H.R MOTO — premium sport motorcycle gloves and masks in Morocco. Free delivery to all cities, cash on delivery, exchange available.">
+<meta name="theme-color" content="#FFD60A">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&family=Lalezar&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#E10600; --blue:#1E6BFF; --yellow:#FFD60A;
+  --bg:#f3f4f8; --bg2:#ffffff; --card:#ffffff; --line:#e2e4ec; --amber:#a87a00;
+  --text:#15161c; --muted:#5f6272; --green:#25D366;
+  --ease:cubic-bezier(.2,.8,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:'Cairo',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+img,svg{display:block;max-width:100%}
+button{font-family:inherit;cursor:pointer;border:0;color:inherit;background:none}
+a{color:inherit;text-decoration:none}
+.wrap{width:100%;max-width:1100px;margin:0 auto;padding:0 16px}
+
+/* ---------- Loader ---------- */
+#loader{position:fixed;inset:0;z-index:200;background:var(--bg);display:grid;place-items:center;transition:opacity .5s,visibility .5s}
+#loader.done{opacity:0;visibility:hidden}
+#loader .logo{font-size:2.4rem;animation:pulse 1s infinite alternate}
+#loader .track{width:140px;height:3px;background:var(--line);border-radius:3px;margin:14px auto 0;overflow:hidden}
+#loader .track i{display:block;height:100%;width:40%;background:linear-gradient(90deg,var(--red),var(--blue));animation:load 1s infinite var(--ease)}
+@keyframes load{from{transform:translateX(-100%)}to{transform:translateX(260%)}}
+@keyframes pulse{to{transform:scale(1.06);filter:drop-shadow(0 0 18px rgba(225,6,0,.6))}}
+
+/* ---------- Scroll progress ---------- */
+#progress{position:fixed;top:0;left:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--red),var(--yellow),var(--blue));z-index:70}
+[dir=rtl] #progress{transform-origin:100% 50%}
+
+/* ---------- Promo bar ---------- */
+.promo{background:var(--yellow);color:#111;font-weight:900;font-size:.85rem;text-align:center;overflow:hidden;position:relative}
+.promo-in{padding:7px 12px;animation:promoGlow 2.4s ease-in-out infinite}
+.promo::after{content:"";position:absolute;top:0;left:-40%;width:30%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.7),transparent);transform:skewX(-20deg);animation:shine 3s infinite}
+@keyframes promoGlow{50%{transform:scale(1.03)}}
+
+/* ---------- Header ---------- */
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.8);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:background .3s,border-color .3s}
+header.scrolled{background:rgba(255,255,255,.96);border-color:var(--line);box-shadow:0 4px 20px rgba(0,0,0,.06)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:64px;transition:height .3s}
+header.scrolled .bar{height:56px}
+.logo{font-weight:900;font-size:1.6rem;letter-spacing:1px;direction:ltr;font-style:italic;unicode-bidi:isolate}
+.logo span{color:var(--red)}
+.actions{display:flex;gap:8px;align-items:center}
+.lang{border:1px solid var(--line);border-radius:12px;padding:8px 12px;font-weight:700;font-size:.9rem;background:var(--bg2);transition:border-color .2s}
+.lang:hover{border-color:var(--blue)}
+.cart-btn{position:relative;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:8px 12px;font-weight:700;display:flex;align-items:center;gap:8px;transition:border-color .2s,transform .2s}
+.cart-btn:hover{border-color:var(--red)}
+.cart-btn svg{width:22px;height:22px}
+.cart-btn.shake{animation:shake .5s}
+@keyframes shake{20%{transform:rotate(-8deg)}40%{transform:rotate(8deg)}60%{transform:rotate(-5deg)}80%{transform:rotate(4deg)}}
+.count{background:var(--red);color:#fff;border-radius:99px;min-width:22px;height:22px;font-size:.8rem;display:grid;place-items:center;padding:0 6px}
+.count.bump{animation:bump .4s var(--ease)}
+@keyframes bump{50%{transform:scale(1.5)}}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;overflow:hidden;padding:36px 0 30px;min-height:calc(100svh - 64px);display:flex;align-items:center}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.22;animation:blob 12s infinite alternate ease-in-out;pointer-events:none}
+.blob.r{width:340px;height:340px;background:var(--red);top:-80px;inset-inline-end:-80px}
+.blob.b{width:360px;height:360px;background:var(--blue);bottom:-120px;inset-inline-start:-100px;animation-delay:-6s}
+@keyframes blob{50%{transform:translate(40px,30px) scale(1.15)}100%{transform:translate(-30px,50px) scale(.9)}}
+.lines{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.lines i{position:absolute;height:2px;width:120px;border-radius:2px;background:linear-gradient(90deg,transparent,rgba(225,6,0,.45));animation:speed linear infinite;opacity:0}
+@keyframes speed{0%{transform:translateX(-30vw);opacity:0}10%{opacity:1}100%{transform:translateX(130vw);opacity:0}}
+.hero-grid{position:relative;z-index:1;display:grid;gap:20px;align-items:center;text-align:center}
+@media(min-width:860px){.hero-grid{grid-template-columns:1.1fr .9fr;text-align:start}}
+.kicker{display:inline-flex;gap:8px;align-items:center;font-weight:800;font-size:.85rem;color:var(--amber);background:rgba(255,214,10,.18);border:1px solid rgba(255,214,10,.55);padding:4px 12px;border-radius:99px;margin-bottom:14px}
+.kicker b{width:8px;height:8px;border-radius:50%;background:var(--yellow);animation:blink 1s infinite}
+@keyframes blink{50%{opacity:.2}}
+.hero h1{font-size:clamp(2rem,8vw,3.6rem);font-weight:900;line-height:1.15;margin-bottom:14px}
+.hero h1 .w{display:inline-block;opacity:0;transform:translateY(40px) rotate(4deg);animation:wordIn .7s var(--ease) forwards}
+@keyframes wordIn{to{opacity:1;transform:none}}
+.grad{background:linear-gradient(90deg,var(--red),var(--yellow),var(--blue),var(--red));background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:gradMove 6s linear infinite}
+@keyframes gradMove{to{background-position:300% 0}}
+.hero p{color:var(--muted);max-width:520px;margin:0 auto 22px}
+@media(min-width:860px){.hero p{margin-inline:0}}
+.btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+@media(min-width:860px){.btns{justify-content:flex-start}}
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:8px;font-weight:800;padding:14px 28px;border-radius:12px;font-size:1rem;transition:transform .2s,box-shadow .2s}
+.btn:active{transform:scale(.96)}
+.btn.primary{background:var(--red);color:#fff;box-shadow:0 8px 24px rgba(225,6,0,.45)}
+.btn.primary:hover{box-shadow:0 10px 34px rgba(225,6,0,.7);transform:translateY(-2px)}
+.btn.ghost{border:1px solid var(--line);background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.06)}
+.btn.ghost:hover{border-color:var(--green)}
+.btn.primary::after,.add::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);animation:shine 3.2s infinite}
+@keyframes shine{0%,60%{left:-60%}100%{left:130%}}
+.badges{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:22px}
+@media(min-width:860px){.badges{justify-content:flex-start}}
+.badge{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.05);border:1px solid var(--line);padding:7px 13px;border-radius:99px;font-weight:600;font-size:.85rem}
+
+.visual{position:relative;width:min(340px,82vw);aspect-ratio:1;margin:6px auto 0}
+.ring{position:absolute;inset:0;border-radius:50%;border:2px dashed rgba(0,0,0,.15);animation:spin 22s linear infinite}
+.ring.two{inset:12%;border:2px solid transparent;border-top-color:var(--red);border-bottom-color:var(--blue);animation-duration:6s;animation-direction:reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.glow{position:absolute;inset:22%;border-radius:50%;background:radial-gradient(circle,rgba(225,6,0,.55),transparent 70%);animation:pulse 2s infinite alternate}
+.float{position:absolute;inset:8%;animation:float 4s ease-in-out infinite}
+.float.back{inset:auto;width:34%;top:2%;inset-inline-start:-4%;z-index:2;animation-delay:-2s;opacity:.9;transform:rotate(-14deg)}
+.float svg{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 20px 30px rgba(0,0,0,.6))}
+.float img{width:100%;height:100%;object-fit:cover;border-radius:50%;-webkit-mask-image:radial-gradient(circle,#000 55%,transparent 71%);mask-image:radial-gradient(circle,#000 55%,transparent 71%)}
+.float.back img{border-radius:24px;-webkit-mask-image:none;mask-image:none;box-shadow:0 0 0 2px var(--blue),0 20px 40px rgba(0,0,0,.6)}
+@keyframes float{50%{transform:translateY(-16px) rotate(3deg)}}
+.float.back{animation-name:float2}
+@keyframes float2{0%,100%{transform:rotate(-14deg) translateY(0)}50%{transform:rotate(-8deg) translateY(-12px)}}
+.scroll-hint{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);width:24px;height:38px;border:2px solid rgba(0,0,0,.25);border-radius:14px;z-index:1}
+.scroll-hint::after{content:"";position:absolute;top:6px;left:50%;width:4px;height:8px;margin-left:-2px;border-radius:2px;background:var(--red);animation:wheel 1.5s infinite}
+@keyframes wheel{to{transform:translateY(12px);opacity:0}}
+
+/* ---------- Marquee ---------- */
+.marquee{background:var(--red);overflow:hidden;white-space:nowrap;transform:rotate(-1.5deg);margin:10px -10px;box-shadow:0 10px 30px rgba(225,6,0,.3);direction:ltr}
+.marquee.blue{background:var(--blue);transform:rotate(1.5deg);margin-top:-6px;box-shadow:0 10px 30px rgba(30,107,255,.3)}
+.track{display:inline-flex;animation:marq 22s linear infinite}
+.marquee.blue .track{animation-direction:reverse}
+.marquee.yellow{background:var(--yellow);transform:rotate(-1deg);margin-top:-4px;box-shadow:0 10px 30px rgba(255,214,10,.3)}
+.marquee.yellow .track span{color:#111}
+.marquee.yellow .track{animation-duration:18s}
+.track span{font-weight:900;font-size:1rem;padding:10px 0;letter-spacing:1px;color:#fff}
+.track span::after{content:"✦";margin:0 18px;opacity:.7}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* ---------- Sections ---------- */
+section{padding:56px 0}
+h2.title{font-size:clamp(1.6rem,6vw,2.2rem);font-weight:900;text-align:center;margin-bottom:6px}
+h2.title::after{content:"";display:block;width:0;height:4px;border-radius:4px;margin:8px auto 0;background:linear-gradient(90deg,var(--red),var(--yellow),var(--blue));transition:width .8s var(--ease) .2s}
+h2.title.in::after{width:70px}
+.sub{text-align:center;color:var(--muted);margin-bottom:24px}
+
+/* reveal on scroll */
+.js .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.js .reveal.zoom{transform:scale(.9)}
+.reveal.zoom.in{transform:none}
+
+/* ---------- Tabs ---------- */
+.tabs{position:relative;display:flex;gap:6px;overflow-x:auto;padding:4px;margin:0 auto 18px;width:max-content;max-width:100%;background:var(--bg2);border:1px solid var(--line);border-radius:99px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.pill{position:absolute;top:4px;bottom:4px;border-radius:99px;background:var(--blue);transition:left .4s var(--ease),width .4s var(--ease);box-shadow:0 4px 14px rgba(30,107,255,.5)}
+.tab{position:relative;z-index:1;flex:0 0 auto;padding:8px 18px;border-radius:99px;font-weight:700;font-size:.92rem;color:var(--muted);transition:color .3s}
+.tab.active{color:#fff}
+.tab[data-f="offers"]:not(.active),.tab[data-f="packs"]:not(.active){color:var(--amber)}
+
+/* ---------- Products ---------- */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:760px){.grid{grid-template-columns:repeat(3,1fr);gap:18px}}
+@media(min-width:1000px){.grid{grid-template-columns:repeat(4,1fr)}}
+.card{position:relative;background:var(--card);border:1px solid var(--line);box-shadow:0 6px 20px rgba(20,22,40,.07);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transform-style:preserve-3d;transition:transform .25s var(--ease),border-color .3s,box-shadow .3s;animation:cardIn .6s var(--ease) both}
+@keyframes cardIn{from{opacity:0;transform:translateY(30px) scale(.95)}}
+.card:hover{border-color:var(--blue);box-shadow:0 18px 40px rgba(30,107,255,.25)}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(300px circle at var(--mx,50%) var(--my,0%),rgba(30,107,255,.08),transparent 40%);opacity:0;transition:opacity .3s;pointer-events:none;z-index:2}
+.card:hover::before{opacity:1}
+.pic{position:relative;aspect-ratio:1;background:radial-gradient(circle at 50% 40%,#ffffff,#e9ebf1);display:grid;place-items:center;overflow:hidden}
+.pic img,.pic svg{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.pic svg{padding:14%}
+.pic img{background:#fff}
+.pic img.slide{position:absolute;inset:0;opacity:0;transition:opacity .9s,transform .6s var(--ease)}
+.pic img.slide.on{opacity:1}
+.card:hover .pic svg{transform:scale(1.1) rotate(-3deg)}
+.card:hover .pic img{transform:scale(1.08)}
+.tag{position:absolute;top:10px;inset-inline-start:10px;background:var(--yellow);color:#111;font-weight:800;font-size:.75rem;padding:2px 10px;border-radius:99px;animation:tagPulse 1.6s infinite;z-index:1}
+@keyframes tagPulse{50%{box-shadow:0 0 0 7px rgba(255,214,10,0)}0%{box-shadow:0 0 0 0 rgba(255,214,10,.7)}}
+.info{padding:12px;display:flex;flex-direction:column;gap:7px;flex:1}
+.info h3{font-size:1rem;font-weight:800;line-height:1.35}
+.info p{font-size:.82rem;color:var(--muted);flex:1}
+.price{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.now{font-size:1.2rem;font-weight:900}
+.now b{color:var(--red)}
+.old{color:var(--muted);text-decoration:line-through;font-size:.9rem}
+.sizes{display:flex;gap:6px;flex-wrap:wrap}
+.card.pack{border-color:rgba(225,6,0,.4);background:linear-gradient(160deg,rgba(255,214,10,.16),var(--card) 40%,rgba(30,107,255,.08))}
+.card.pack::after{content:"";position:absolute;inset:-2px;border-radius:20px;padding:2px;background:conic-gradient(from var(--a,0deg),var(--red),var(--yellow) 20%,transparent 35%,var(--blue),transparent 75%,var(--red));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:spinBorder 4s linear infinite;pointer-events:none;z-index:3}
+@property --a{syntax:"<angle>";inherits:false;initial-value:0deg}
+@keyframes spinBorder{to{--a:360deg}}
+.combo{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#e2e4ec;place-items:stretch}
+.combo .half{position:relative;overflow:hidden}
+.combo .half img,.combo .half svg{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.combo .half:first-child{animation:inL .8s var(--ease) both}
+.combo .half:nth-child(2){animation:inR .8s var(--ease) both}
+.combo.swap .half:first-child{animation:inL .6s var(--ease) both}
+@keyframes inL{from{transform:translateX(-40%);opacity:0}}
+@keyframes inR{from{transform:translateX(40%);opacity:0}}
+.plus{position:absolute;top:50%;left:50%;width:38px;height:38px;margin:-19px 0 0 -19px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:1.5rem;color:#111;background:var(--yellow);box-shadow:0 0 0 4px var(--card),0 6px 18px rgba(0,0,0,.5);animation:plusPulse 1.6s ease-in-out infinite;z-index:1}
+@keyframes plusPulse{50%{transform:scale(1.18) rotate(90deg)}}
+.times{position:absolute;bottom:8px;inset-inline-end:8px;background:var(--blue);color:#fff;font-weight:900;padding:0 9px;border-radius:99px;font-size:.9rem}
+.pick{display:flex;flex-direction:column;gap:4px;font-size:.78rem;color:var(--muted);font-weight:700}
+.pick select{width:100%;background:var(--bg2);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:7px 8px;font:inherit;font-size:.85rem}
+.pick select:focus{outline:0;border-color:var(--blue)}
+.save{display:inline-block;align-self:flex-start;font-size:.78rem;font-weight:800;color:#5c4300;background:rgba(255,214,10,.45);padding:1px 10px;border-radius:99px}
+.size{min-width:38px;padding:4px 10px;border-radius:8px;background:var(--bg2);border:1px solid var(--line);font-weight:700;font-size:.85rem;transition:all .2s}
+.size:hover{border-color:var(--blue)}
+.size.on{background:var(--blue);border-color:var(--blue);color:#fff;transform:scale(1.08)}
+.add{position:relative;overflow:hidden;background:var(--red);color:#fff;font-weight:800;padding:11px;border-radius:10px;font-size:.95rem;margin-top:4px;transition:transform .15s,background .3s}
+.add:active{transform:scale(.95)}
+.add.ok{background:var(--green)}
+.flyer{position:fixed;z-index:120;pointer-events:none;border-radius:50%;overflow:hidden;background:#fff;box-shadow:0 0 0 3px var(--red),0 10px 30px rgba(225,6,0,.6)}
+.flyer svg,.flyer img{width:100%;height:100%;object-fit:cover;padding:10%}
+
+/* ---------- Why ---------- */
+.why{background:var(--bg2);border-block:1px solid var(--line);position:relative;overflow:hidden}
+.feats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:760px){.feats{grid-template-columns:repeat(4,1fr)}}
+.feat{position:relative;background:var(--card);box-shadow:0 6px 20px rgba(20,22,40,.06);border:1px solid var(--line);border-radius:18px;padding:22px 14px;text-align:center;overflow:hidden;transition:transform .3s var(--ease),border-color .3s}
+.feat:hover{transform:translateY(-6px);border-color:var(--red)}
+.feat::after{content:"";position:absolute;inset:auto 0 0;height:3px;background:linear-gradient(90deg,var(--red),var(--blue));transform:scaleX(0);transition:transform .5s var(--ease)}
+.feat:hover::after,.feat.in::after{transform:scaleX(1)}
+.ico{width:58px;height:58px;margin:0 auto 10px;border-radius:16px;display:grid;place-items:center;font-size:1.7rem;background:linear-gradient(135deg,rgba(225,6,0,.22),rgba(255,214,10,.18),rgba(30,107,255,.22));border:1px solid var(--line);animation:bob 3s ease-in-out infinite}
+.feat:nth-child(2) .ico{animation-delay:-.75s}.feat:nth-child(3) .ico{animation-delay:-1.5s}.feat:nth-child(4) .ico{animation-delay:-2.25s}
+@keyframes bob{50%{transform:translateY(-6px)}}
+.feat h3{font-size:1rem;margin-bottom:4px}
+.feat p{font-size:.82rem;color:var(--muted)}
+
+/* ---------- Reviews ---------- */
+.reviews{display:grid;gap:14px}
+@media(min-width:760px){.reviews{grid-template-columns:repeat(3,1fr)}}
+.rev{background:var(--card);box-shadow:0 6px 20px rgba(20,22,40,.06);border:1px solid var(--line);border-inline-start:4px solid var(--blue);border-radius:16px;padding:18px;transition:transform .3s var(--ease)}
+.rev:hover{transform:translateY(-4px) rotate(-.5deg)}
+.stars span{display:inline-block;color:#ffc107;opacity:0;transform:scale(0)}
+.rev.in .stars span{animation:pop .4s var(--ease) forwards}
+.rev.in .stars span:nth-child(2){animation-delay:.1s}.rev.in .stars span:nth-child(3){animation-delay:.2s}.rev.in .stars span:nth-child(4){animation-delay:.3s}.rev.in .stars span:nth-child(5){animation-delay:.4s}
+@keyframes pop{70%{transform:scale(1.4)}to{opacity:1;transform:scale(1)}}
+.rev p{margin:6px 0 10px;font-size:.95rem}
+.rev small{color:var(--muted);font-weight:700}
+
+/* ---------- CTA band ---------- */
+.band{text-align:center;padding:44px 16px;border-radius:24px;background:linear-gradient(120deg,var(--red),#7a0a3a,var(--blue));background-size:200% 200%;animation:bandMove 8s ease infinite;position:relative;overflow:hidden}
+@keyframes bandMove{50%{background-position:100% 100%}}
+.band h2{font-size:clamp(1.4rem,5.5vw,2rem);font-weight:900;margin-bottom:6px}
+.band p{opacity:.9;margin-bottom:18px}
+.band{color:#fff}
+.band .btn{background:#fff;color:#111}
+
+/* ---------- Footer ---------- */
+footer{background:#e9ebf1;border-top:1px solid var(--line);padding:36px 0 96px;text-align:center}
+.social{display:flex;justify-content:center;gap:10px;margin:16px 0;flex-wrap:wrap}
+.social a{display:flex;align-items:center;gap:8px;background:var(--bg2);border:1px solid var(--line);padding:10px 16px;border-radius:12px;font-weight:700;transition:transform .2s,border-color .2s}
+.social a:hover{border-color:var(--red);transform:translateY(-3px)}
+.social svg{width:20px;height:20px;fill:currentColor}
+footer small{color:var(--muted)}
+
+/* ---------- Floating WhatsApp ---------- */
+.wa-fab{position:fixed;bottom:18px;inset-inline-end:18px;z-index:40;width:56px;height:56px;border-radius:50%;background:var(--green);display:grid;place-items:center;box-shadow:0 6px 20px rgba(0,0,0,.5)}
+.wa-fab::before{content:"";position:absolute;inset:0;border-radius:50%;background:var(--green);animation:ripple 2s infinite;z-index:-1}
+@keyframes ripple{to{transform:scale(1.8);opacity:0}}
+.wa-fab svg{width:30px;height:30px;fill:#fff}
+
+/* ---------- Cart drawer ---------- */
+.overlay{position:fixed;inset:0;background:rgba(20,22,30,.45);backdrop-filter:blur(3px);z-index:60;opacity:0;pointer-events:none;transition:.3s}
+.overlay.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;bottom:0;inset-inline-end:0;width:min(420px,100%);background:var(--bg2);z-index:61;transform:translateX(100%);transition:transform .45s var(--ease);display:flex;flex-direction:column}
+[dir=rtl] .drawer{transform:translateX(-100%)}
+.drawer.open,[dir=rtl] .drawer.open{transform:none}
+.dh{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--line);font-weight:900;font-size:1.15rem}
+.x{background:var(--card);width:36px;height:36px;border-radius:10px;font-size:1.1rem;transition:transform .3s}
+.x:hover{transform:rotate(90deg)}
+.items{flex:1;overflow-y:auto;padding:12px 16px}
+.empty{text-align:center;color:var(--muted);padding:40px 0}
+.line{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);animation:slideIn .4s var(--ease) both}
+@keyframes slideIn{from{opacity:0;transform:translateX(30px)}}
+.line .th{width:56px;height:56px;border-radius:10px;background:#f3f4f8;flex:none;overflow:hidden}
+.line .th svg{width:100%;height:100%;padding:6px}
+.line .th img{width:100%;height:100%;object-fit:cover}
+.line .d{flex:1;min-width:0}
+.line .d b{display:block;font-size:.9rem;line-height:1.3}
+.line .d small{color:var(--muted)}
+.qty{display:flex;align-items:center;gap:8px;margin-top:4px}
+.qty button{width:28px;height:28px;border-radius:8px;background:var(--card);font-weight:900}
+.line .lp{font-weight:800;white-space:nowrap}
+.foot{border-top:1px solid var(--line);padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.total{display:flex;justify-content:space-between;font-weight:900;font-size:1.1rem}
+.foot input,.foot textarea{width:100%;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 12px;color:var(--text);font:inherit;font-size:16px;transition:border-color .2s}
+.foot input:focus,.foot textarea:focus{outline:0;border-color:var(--blue)}
+.foot .err{border-color:var(--red);animation:shake .4s}
+.order{background:var(--green);color:#fff;font-weight:900;padding:14px;border-radius:12px;font-size:1.05rem}
+.note{font-size:.8rem;color:var(--muted);text-align:center}
+.toast{position:fixed;bottom:90px;left:50%;transform:translate(-50%,20px);background:#15161c;color:#fff;font-weight:700;padding:10px 20px;border-radius:99px;z-index:130;opacity:0;pointer-events:none;transition:.35s var(--ease);white-space:nowrap}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
 </head>
 <body>
 
-<header class="nav">
-  <a class="brand" href="#top">
-    <img class="logo" src="images/logo-sm.jpg" alt="Snack Tbon">
-    <span class="brand-text"><b>Salhiy Tboun</b><small>Lmsrf9</small></span>
-  </a>
-  <nav class="links">
-    <a href="#menu">المينيو</a>
-    <a href="#why">علاش حنا</a>
-    <a href="#contact">تواصل</a>
-  </nav>
-  <button class="cart-btn" id="openCart" aria-label="السلة">🛒 <span id="cartCount">0</span></button>
+<div id="loader"><div><div class="logo">H.R <span>MOTO</span></div><div class="track"><i></i></div></div></div>
+<div id="progress"></div>
+
+<div class="promo"><div class="promo-in"><span data-t="promo">🔥 Packs: save up to 58 MAD — Free delivery to all of Morocco 🚚</span></div></div>
+<header id="hdr">
+  <div class="wrap bar">
+    <a href="#top" class="logo">H.R <span>MOTO</span></a>
+    <div class="actions">
+      <button class="lang" id="langBtn">عربي</button>
+      <button class="cart-btn" id="openCart" aria-label="Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+        <span class="count" id="count">0</span>
+      </button>
+    </div>
+  </div>
 </header>
 
-<section class="hero" id="top">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-    <span class="badge">🇲🇦 كلشي كتحماق عليه فالمغرب</span>
-    <h1>الجوع ما كيفهمش<br><em>غير الماكلة الصحيحة</em></h1>
-    <p>طاكوس، بيتزا، شورما، سندويتشات، سوشي وحتى الأطباق المغربية الأصيلة. كلشي فبلاصة وحدة، سخون وكيوصلك لباب الدار.</p>
-    <div class="hero-cta">
-      <a href="#menu" class="btn primary">شوف المينيو 🍽️</a>
-      <a href="#contact" class="btn ghost">طلب بالواتساب</a>
+<main id="top">
+  <div class="hero">
+    <div class="blob r"></div><div class="blob b"></div>
+    <div class="lines" id="lines"></div>
+    <div class="wrap hero-grid">
+      <div>
+        <div class="kicker"><b></b><span data-t="kicker">New collection 2026</span></div>
+        <h1 id="heroTitle">Motorcycle Gloves &amp; Masks – <span class="grad">Quality, Protection &amp; Style</span></h1>
+        <p data-t="heroSub">Gear up with premium sport riding gloves and masks. Free delivery to all cities.</p>
+        <div class="btns">
+          <a href="#shop" class="btn primary" data-t="cta">Shop now 🏍️</a>
+          <a class="btn ghost" id="heroWa" target="_blank" rel="noopener" data-t="cta2">💬 Order on WhatsApp</a>
+        </div>
+        <div class="badges">
+          <span class="badge" data-t="b1">🚚 Free delivery to all cities</span>
+          <span class="badge" data-t="b2">💵 Cash on delivery</span>
+          <span class="badge" data-t="b3">🔄 Exchange available</span>
+        </div>
+      </div>
+      <div class="visual" id="visual">
+        <div class="ring"></div><div class="ring two"></div><div class="glow"></div>
+        <div class="float back" id="heroBack"></div>
+        <div class="float" id="heroMain"></div>
+      </div>
     </div>
+    <div class="scroll-hint"></div>
   </div>
-  <div class="floaters" aria-hidden="true">
-    <span style="--d:0s;--x:8%">🌮</span><span style="--d:1s;--x:22%">🍕</span>
-    <span style="--d:2s;--x:38%">🌯</span><span style="--d:.5s;--x:54%">🍣</span>
-    <span style="--d:1.5s;--x:70%">🍔</span><span style="--d:2.5s;--x:86%">🥘</span>
-  </div>
-</section>
 
-<div class="marquee" aria-hidden="true">
-  <div class="track">
-    <span>🌮 طاكوس</span><span>🍕 بيتزا</span><span>🌯 شورما</span><span>🥪 سندويتشات</span><span>🍣 سوشي</span><span>🍔 برغر</span><span>🥧 بسطيلة</span><span>🍲 طاجين</span><span>🍵 أتاي</span>
-    <span>🌮 طاكوس</span><span>🍕 بيتزا</span><span>🌯 شورما</span><span>🥪 سندويتشات</span><span>🍣 سوشي</span><span>🍔 برغر</span><span>🥧 بسطيلة</span><span>🍲 طاجين</span><span>🍵 أتاي</span>
-  </div>
-</div>
+  <div class="marquee"><div class="track" id="mq1"></div></div>
+  <div class="marquee blue"><div class="track" id="mq2"></div></div>
+  <div class="marquee yellow"><div class="track" id="mq3"></div></div>
 
-<main>
-  <section class="menu" id="menu">
-    <h2 class="title">المينيو ديالنا</h2>
-    <p class="sub">اختار الصنف وزيد لسلتك، وصافي!</p>
-    <input class="search" id="search" type="search" placeholder="🔍 قلب على طاكوس، بيتزا، سوشي…">
-    <div class="tabs" id="tabs"></div>
-    <div class="grid" id="grid"></div>
+  <section id="shop">
+    <div class="wrap">
+      <h2 class="title reveal" data-t="shopTitle">Our Products</h2>
+      <p class="sub reveal" data-t="shopSub">Pick your size and add to cart</p>
+      <div class="tabs reveal" id="tabs">
+        <span class="pill" id="pill"></span>
+        <button class="tab active" data-f="all" data-t="all">All</button>
+        <button class="tab" data-f="packs" data-t="packs">Packs 🎁</button>
+        <button class="tab" data-f="gloves" data-t="gloves">Gloves</button>
+        <button class="tab" data-f="masks" data-t="masks">Masks</button>
+        <button class="tab" data-f="offers" data-t="offers">Offers 🔥</button>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
   </section>
 
-  <section class="why" id="why">
-    <h2 class="title">علاش <span>Salhiy Tboun</span>؟</h2>
-    <div class="why-grid">
-      <div><b>🔥</b><h3>سخون ديما</h3><p>كنطيبو عند الطلب، ماشي من قبل.</p></div>
-      <div><b>🥩</b><h3>مواد طرية</h3><p>لحم، خضرة وصلصات كنجهزوهم نهار بنهار.</p></div>
-      <div><b>🛵</b><h3>توصيل سريع</h3><p>كيوصلك فأقل من 45 دقيقة.</p></div>
-      <div><b>💸</b><h3>ثمن معقول</h3><p>الجودة العالية بثمن فالمتناول.</p></div>
+  <section class="why">
+    <div class="wrap">
+      <h2 class="title reveal" data-t="whyTitle">Why choose H.R MOTO?</h2>
+      <p class="sub reveal" data-t="whySub">Gear built for speed and safety</p>
+      <div class="feats">
+        <div class="feat reveal"><div class="ico">🛡️</div><h3 data-t="f1">Real protection</h3><p data-t="f1d">Reinforced knuckles and palm to keep you safe on every road.</p></div>
+        <div class="feat reveal"><div class="ico">🌬️</div><h3 data-t="f2">Breathable fabric</h3><p data-t="f2d">Light and comfortable, even in the heat.</p></div>
+        <div class="feat reveal"><div class="ico">📱</div><h3 data-t="f3">Touchscreen compatible</h3><p data-t="f3d">Use your phone without taking your gloves off.</p></div>
+        <div class="feat reveal"><div class="ico">✅</div><h3 data-t="f4">Guaranteed quality</h3><p data-t="f4d">Not satisfied? Easy exchange.</p></div>
+      </div>
     </div>
   </section>
 
-  <section class="contact" id="contact">
-    <h2 class="title">تواصل معانا</h2>
-    <p class="sub">الطلبات كتوصل مباشرة لواتساب 📲</p>
-    <div class="contact-cards">
-      <a class="btn primary" id="waLink" href="#" target="_blank" rel="noopener">💬 واتساب</a>
-      <span class="chip">🕒 كل نهار من 11:00 حتى 01:00</span>
-      <span class="chip">📍 التوصيل لجميع الأحياء</span>
+  <section>
+    <div class="wrap">
+      <h2 class="title reveal" data-t="revTitle">Customer Reviews</h2>
+      <p class="sub reveal" data-t="revSub">What riders say about us</p>
+      <div class="reviews">
+        <div class="rev reveal"><div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p data-t="r1">Great quality gloves, comfortable and protective. Delivered in two days!</p><small data-t="r1n">— Youssef, Casablanca</small></div>
+        <div class="rev reveal"><div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p data-t="r2">Bought the winter gloves — no water, no cold. Highly recommended.</p><small data-t="r2n">— Ayoub, Tangier</small></div>
+        <div class="rev reveal"><div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p data-t="r3">The face mask is excellent and light. Paying on delivery is a big plus.</p><small data-t="r3n">— Souad, Marrakech</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="band reveal zoom">
+        <h2 data-t="bandTitle">Ready to ride? 🏁</h2>
+        <p data-t="bandSub">Free delivery • Pay when you receive • Easy exchange</p>
+        <a href="#shop" class="btn" data-t="cta">Shop now 🏍️</a>
+      </div>
     </div>
   </section>
 </main>
 
-<footer>© <span id="year"></span> Salhiy Tboun Lmsrf9 — صُنع بالحب والتوابل ❤️</footer>
+<footer>
+  <div class="wrap">
+    <div class="logo">H.R <span>MOTO</span></div>
+    <small data-t="tagline">Sport motorcycle gloves &amp; masks — Morocco 🇲🇦</small>
+    <div class="social">
+      <a id="lnkTik" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M19.6 6.7a5 5 0 0 1-3.8-4.4V2h-3.5v13.6a2.9 2.9 0 1 1-2-2.8V9.3a6.4 6.4 0 1 0 5.5 6.3V9a8.5 8.5 0 0 0 4.9 1.6V7.1a5 5 0 0 1-1.1-.4z"/></svg>TikTok</a>
+      <a id="lnkIg" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm5 3.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM17.5 5.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>Instagram</a>
+      <a id="lnkWa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zM8.6 7.3c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3 2.4 1 2.9.8 3.4.7.5 0 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4l-.5-.3-1.9-.9c-.3-.1-.5-.1-.6.1l-.9 1.1c-.2.2-.3.2-.6.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.9-2c-.2-.5-.4-.4-.6-.4z"/></svg>WhatsApp</a>
+    </div>
+    <small>© <span id="yr"></span> H.R MOTO — <span data-t="rights">All rights reserved</span></small>
+  </div>
+</footer>
+
+<a class="wa-fab" id="fabWa" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zM8.6 7.3c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3 2.4 1 2.9.8 3.4.7.5 0 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4l-.5-.3-1.9-.9c-.3-.1-.5-.1-.6.1l-.9 1.1c-.2.2-.3.2-.6.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.9-2c-.2-.5-.4-.4-.6-.4z"/></svg>
+</a>
 
 <div class="overlay" id="overlay"></div>
-<aside class="drawer" id="drawer" aria-hidden="true">
-  <div class="drawer-head"><h3>🛒 السلة ديالك</h3><button id="closeCart" aria-label="سد">✕</button></div>
-  <div class="drawer-body" id="cartItems"></div>
-  <div class="drawer-foot">
-    <input id="custName" placeholder="سميتك" autocomplete="name">
-    <input id="custPhone" placeholder="رقم التيليفون" inputmode="tel" autocomplete="tel">
-    <input id="custAddr" placeholder="العنوان ديالك" autocomplete="street-address">
-    <input id="custNote" placeholder="ملاحظة (اختياري)">
-    <div id="ship" class="ship"></div>
-    <div class="sum"><span>الطلب</span><span id="sub">0 درهم</span></div>
-    <div class="sum"><span>التوصيل</span><span id="fee">0 درهم</span></div>
-    <div class="total"><span>المجموع</span><b id="total">0 درهم</b></div>
-    <a class="btn primary full" id="checkout" href="#" target="_blank" rel="noopener">أطلب عبر واتساب ✅</a>
+<aside class="drawer" id="drawer">
+  <div class="dh"><span data-t="cartTitle">🛒 Your Cart</span><button class="x" id="closeCart" aria-label="Close">✕</button></div>
+  <div class="items" id="items"></div>
+  <div class="foot" id="foot">
+    <div class="total"><span data-t="total">Total</span><span id="total">0</span></div>
+    <input id="fName" data-ph="name" placeholder="Full name" autocomplete="name">
+    <input id="fPhone" data-ph="phone" placeholder="Phone number" type="tel" inputmode="tel" autocomplete="tel">
+    <input id="fCity" data-ph="city" placeholder="City" autocomplete="address-level2">
+    <textarea id="fAddr" rows="2" data-ph="addr" placeholder="Address (optional)"></textarea>
+    <button class="order" id="orderBtn" data-t="order">📲 Confirm order on WhatsApp</button>
+    <div class="note" data-t="note">🚚 Free delivery • 💵 Cash on delivery</div>
   </div>
 </aside>
-
-<div class="modal" id="modal" role="dialog" aria-modal="true"><button class="x" data-closem aria-label="سد">✕</button><div id="modalBody"></div></div>
 <div class="toast" id="toast"></div>
-<script src="script.js"></script>
+
+<script>
+document.documentElement.classList.add("js");
+window.onerror = function(){ document.documentElement.classList.remove("js"); var l=document.getElementById("loader"); if(l) l.style.display="none"; };
+/* ================= STORE SETTINGS — edit here ================= */
+const CONFIG = {
+  whatsapp: "212712120150",                       // WhatsApp number, no "+" and no leading 0
+  tiktok:   "https://www.tiktok.com/@hrmoto",     // your TikTok
+  instagram:"https://www.instagram.com/hrmoto",   // your Instagram
+  defaultLang: "en",                              // "en" or "ar"
+  heroImg:  "images/red-gloves.jpg",              // big floating hero photo
+  heroImg2: "images/blue-gloves.jpg"          // small floating photo behind it
+};
+
+/* ================= PRODUCTS — add / edit / remove =================
+   cat: "gloves" | "masks"     (products with an "old" price also show in Offers)
+   sizes: [] if no size
+   img: list of photos, e.g. ["images/a.jpg","images/b.jpg"] (several = animated slideshow) — [] uses the drawn placeholder */
+const PRODUCTS = [
+  {id:1, cat:"gloves", price:149, old:199, sizes:["M","L","XL"], art:"glove", color:"#E10600", img:["images/red-gloves.jpg"],
+   name:{en:"Red Sport Gloves", ar:"قفازات سبور حمر"},
+   desc:{en:"Hard knuckle shell, anti-slip palm and touchscreen fingertip.", ar:"حماية صلبة للمفاصل، كف مضاد للانزلاق وكيخدم مع التاتش."}},
+  {id:8, cat:"gloves", price:149, old:199, sizes:["M","L","XL"], art:"glove", color:"#1E6BFF", img:["images/blue-gloves.jpg"],
+   name:{en:"Blue Sport Gloves", ar:"قفازات سبور زرق"},
+   desc:{en:"Sporty style, comfort and touchscreen fingertips.", ar:"ستايل رياضي وراحة، كيخدمو مع التاتش."}},
+  {id:2, cat:"gloves", price:169, old:219, sizes:["M","L","XL"], art:"glove", color:"#c6ff00", img:["images/neon-gloves.jpg"],
+   name:{en:"Neon Racing Gloves", ar:"قفازات ريسينغ فلوو"},
+   desc:{en:"Full finger protection with high-visibility neon details.", ar:"حماية كاملة للصوابع مع تفاصيل فلوو كتبان من بعيد."}},
+  {id:3, cat:"gloves", price:249, old:299, sizes:["M","L","XL"], art:"glove", color:"#222", img:["images/leather-gloves.jpg","images/leather-gloves-2.jpg"],
+   name:{en:"Perforated Leather Gloves", ar:"قفازات جلد مثقوب"},
+   desc:{en:"Leather look, breathable perforations and knuckle protection.", ar:"جلد كيتنفس بثقوب صغار وحماية للمفاصل."}},
+  {id:4, cat:"gloves", price:129, old:169, sizes:["M","L","XL"], art:"glove", color:"#222", img:["images/half-finger-gloves.jpg"],
+   name:{en:"Half Finger Gloves", ar:"قفازات نص صبع"},
+   desc:{en:"Hard knuckle protection, anti-slip palm and adjustable wrist strap.", ar:"حماية صلبة للمفاصل، كف مضاد للانزلاق وسمطة قابلة للتعديل."}},
+  {id:5, cat:"gloves", price:189, old:249, sizes:["M","L","XL"], art:"glove", color:"#3a3f4d", img:["images/winter-gloves.jpg"],
+   name:{en:"Winter Gloves – Cold & Waterproof", ar:"قفازات الشتا ضد البرد والما"},
+   desc:{en:"Warm lining and water-resistant shell for cold rainy days.", ar:"بطانة دافية وطبقة ضد الما لأيام البرد."}},
+  {id:6, cat:"gloves", price:149, old:199, sizes:["M","L","XL"], art:"glove", color:"#222", img:["images/classic-leather-gloves.jpg"],
+   name:{en:"Classic Leather Gloves", ar:"قفازات جلد كلاسيك"},
+   desc:{en:"Soft leather, elegant everyday style for city rides.", ar:"جلد رطب وستايل أنيق للركوب فالمدينة."}},
+  {id:7, cat:"masks", price:79, old:null, sizes:[], art:"mask", color:"#22242c", img:["images/balaclava.jpg"],
+   name:{en:"Full Face Mask (Balaclava)", ar:"قناع الوجه كامل (Balaclava)"},
+   desc:{en:"Warm, windproof and breathable fleece. Covers the neck too.", ar:"دافي، ضد الريح وكيتنفس. كيغطي حتى العنق."}}
+];
+
+/* ================= PACKS (bundles) =================
+   The customer picks the gloves model + size; masks are added automatically.
+   Price = gloves price + masks price − discount   (old price shown = without discount)
+   maskId: which product is the mask   gloves: which gloves can be chosen ([] = all gloves) */
+const PACKS = [
+  {id:"p1", masks:1, discount:29, maskId:7, gloves:[],
+   name:{en:"Pack: Gloves + Mask", ar:"باك: قفازات + قناع"},
+   desc:{en:"Choose your gloves and get a balaclava with them — save more.", ar:"اختار القفازات اللي بغيتي وخود معاهم قناع — وفّر أكثر."}},
+  {id:"p2", masks:2, discount:58, maskId:7, gloves:[],
+   name:{en:"Pack: Gloves + 2 Masks", ar:"باك: قفازات + 2 أقنعة"},
+   desc:{en:"Gloves plus two balaclavas — one for you, one for your passenger.", ar:"قفازات مع جوج أقنعة — واحد ليك وواحد للي راكب موراك."}}
+];
+
+/* ================= TEXTS ================= */
+const T = {
+  en:{
+    kicker:"New collection 2026", h1a:"Motorcycle Gloves & Masks", h1b:"Quality, Protection & Style",
+    heroSub:"Gear up with premium sport riding gloves and masks. Free delivery to all cities.",
+    cta:"Shop now 🏍️", cta2:"💬 Order on WhatsApp",
+    b1:"🚚 Free delivery to all cities", b2:"💵 Cash on delivery", b3:"🔄 Exchange available",
+    promo:"🔥 Packs: save up to 58 MAD — Free delivery to all of Morocco 🚚",
+    mq3:["🔥 HOT DEALS","UP TO -25%","PACKS GLOVES + MASK","LIMITED STOCK","ORDER NOW"],
+    mq1:["PACKS: GLOVES + MASK","CASH ON DELIVERY","EXCHANGE AVAILABLE","TOUCHSCREEN COMPATIBLE","H.R MOTO"],
+    mq2:["REAL PROTECTION","BREATHABLE FABRIC","GUARANTEED QUALITY","RIDE IN STYLE","ALL OF MOROCCO"],
+    shopTitle:"Our Products", shopSub:"Pick your size and add to cart",
+    all:"All", packs:"Packs 🎁", gloves:"Gloves", masks:"Masks", offers:"Offers 🔥", pickGloves:"Choose your gloves", save:"Save", packTag:"PACK", mask:"Mask",
+    add:"🛒 Add to cart", added:"✓ Added", toast:"Added to cart ✅", empty:"No products here.",
+    whyTitle:"Why choose H.R MOTO?", whySub:"Gear built for speed and safety",
+    f1:"Real protection", f1d:"Reinforced knuckles and palm to keep you safe on every road.",
+    f2:"Breathable fabric", f2d:"Light and comfortable, even in the heat.",
+    f3:"Touchscreen compatible", f3d:"Use your phone without taking your gloves off.",
+    f4:"Guaranteed quality", f4d:"Not satisfied? Easy exchange.",
+    revTitle:"Customer Reviews", revSub:"What riders say about us",
+    r1:"Great quality gloves, comfortable and protective. Delivered in two days!", r1n:"— Youssef, Casablanca",
+    r2:"Bought the winter gloves — no water, no cold. Highly recommended.", r2n:"— Ayoub, Tangier",
+    r3:"The face mask is excellent and light. Paying on delivery is a big plus.", r3n:"— Souad, Marrakech",
+    bandTitle:"Ready to ride? 🏁", bandSub:"Free delivery • Pay when you receive • Easy exchange",
+    tagline:"Sport motorcycle gloves & masks — Morocco 🇲🇦", rights:"All rights reserved",
+    cartTitle:"🛒 Your Cart", total:"Total", cartEmpty:"Your cart is empty 🛒<br>Add a product to get started.",
+    size:"Size", name:"Full name", phone:"Phone number", city:"City", addr:"Address (optional)",
+    order:"📲 Confirm order on WhatsApp", note:"🚚 Free delivery • 💵 Cash on delivery",
+    fill:"Please fill in name, phone and city",
+    cur:"MAD", msgHead:"🏍️ *New order — H.R MOTO*", msgTotal:"Total", msgDel:"🚚 Delivery: Free", msgPay:"💵 Cash on delivery"
+  },
+  ar:{
+    kicker:"كوليكسيون جديدة 2026", h1a:"قفازات وأقنعة الموطور", h1b:"جودة، حماية وستايل",
+    heroSub:"جهّز يديك ووجهك بأحسن معدات الموطور السبور. توصيل مجاني إلى جميع المدن.",
+    cta:"تسوق دابا 🏍️", cta2:"💬 اطلب فواتساب",
+    b1:"🚚 توصيل مجاني لجميع المدن", b2:"💵 الدفع عند الاستلام", b3:"🔄 التبديل متاح",
+    promo:"🔥 الباكات: وفّر حتى 58 درهم — التوصيل مجاني للمغرب كامل 🚚",
+    mq3:["🔥 عروض نار","حتى -25%","باك قفازات + قناع","الكمية محدودة","طلب دابا"],
+    mq1:["باكات: قفازات + قناع","الدفع عند الاستلام","التبديل متاح","كيخدم مع التاتش","H.R MOTO"],
+    mq2:["حماية حقيقية","قماش كيتنفس","جودة مضمونة","ركب بستايل","المغرب كامل"],
+    shopTitle:"منتجاتنا", shopSub:"اختار المقاس وزيد للسلة",
+    all:"الكل", packs:"الباكات 🎁", gloves:"القفازات", masks:"الأقنعة", offers:"العروض 🔥", pickGloves:"اختار القفازات", save:"وفّر", packTag:"باك", mask:"قناع",
+    add:"🛒 زيد للسلة", added:"✓ تزاد", toast:"تزاد للسلة ✅", empty:"ما كاين حتى منتج هنا.",
+    whyTitle:"علاش تختار H.R MOTO؟", whySub:"معدات صنعات للسرعة والأمان",
+    f1:"حماية حقيقية", f1d:"تقوية فالمفاصل والكف باش تكون محمي فكل طريق.",
+    f2:"قماش كيتنفس", f2d:"خفيف ومريح حتى فالحر.",
+    f3:"كيخدم مع التاتش", f3d:"استعمل تيليفونك بلا ما تحيد القفازات.",
+    f4:"جودة مضمونة", f4d:"ما عجبكش؟ التبديل ساهل.",
+    revTitle:"آراء الزبناء", revSub:"شنو كيقولو علينا الراكبين",
+    r1:"القفازات بزاف ديال الجودة، مريحين وكيحميو مزيان. وصلوني فيومين!", r1n:"— يوسف، الدار البيضاء",
+    r2:"شريت القفازات د الشتا، ماكيدخلهاش الما ولا البرد. نصيحة، خذوهم.", r2n:"— أيوب، طنجة",
+    r3:"القناع ممتاز وخفيف، والدفع عند الاستلام عجبني بزاف.", r3n:"— سعاد، مراكش",
+    bandTitle:"واجد تركب؟ 🏁", bandSub:"توصيل مجاني • خلّص ملي توصلك • تبديل ساهل",
+    tagline:"قفازات وأقنعة الموطور السبور — المغرب 🇲🇦", rights:"جميع الحقوق محفوظة",
+    cartTitle:"🛒 السلة ديالك", total:"المجموع", cartEmpty:"السلة خاوية 🛒<br>زيد شي منتج باش تبدا.",
+    size:"المقاس", name:"الاسم الكامل", phone:"رقم الهاتف", city:"المدينة", addr:"العنوان (اختياري)",
+    order:"📲 أكّد الطلب فواتساب", note:"🚚 التوصيل مجاني • 💵 الدفع عند الاستلام",
+    fill:"عمّر الاسم، الهاتف والمدينة",
+    cur:"درهم", msgHead:"🏍️ *طلب جديد — H.R MOTO*", msgTotal:"المجموع", msgDel:"🚚 التوصيل: مجاني", msgPay:"💵 الدفع عند الاستلام"
+  }
+};
+
+/* ================= Placeholder art ================= */
+function art(p){
+  const c = p.color;
+  if(p.art==="mask") return `<svg viewBox="0 0 200 200" aria-hidden="true">
+    <path d="M100 14c-38 0-62 28-62 66v50c0 28 20 52 62 56 42-4 62-28 62-56V80c0-38-24-66-62-66z" fill="${c}" stroke="#555" stroke-width="3"/>
+    <path d="M52 84c10-14 28-20 48-20s38 6 48 20v22c-10 10-28 14-48 14s-38-4-48-14z" fill="#07070a"/>
+    <path d="M60 92c12-8 26-10 40-10s28 2 40 10" stroke="#E10600" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M62 150c24 12 52 12 76 0" stroke="#1E6BFF" stroke-width="4" fill="none" stroke-linecap="round"/></svg>`;
+  return `<svg viewBox="0 0 200 200" aria-hidden="true">
+    <g fill="${c}" stroke="#000" stroke-opacity=".5" stroke-width="3" stroke-linejoin="round">
+      <rect x="46" y="20" width="22" height="82" rx="11"/><rect x="72" y="8" width="22" height="94" rx="11"/>
+      <rect x="98" y="14" width="22" height="88" rx="11"/><rect x="124" y="30" width="22" height="72" rx="11"/>
+      <path d="M32 96l-18-28c-6-10 8-20 16-10l30 38z"/>
+      <path d="M40 90h118l-8 64c-1 8-6 14-14 16l-60 10c-8 1-14-4-16-12z"/>
+    </g>
+    <path d="M48 120h106" stroke="#fff" stroke-opacity=".85" stroke-width="5"/>
+    <rect x="58" y="136" width="84" height="16" rx="6" fill="#0b0b0f" fill-opacity=".55"/>
+    <text x="100" y="149" text-anchor="middle" font-family="Cairo,sans-serif" font-weight="900" font-size="12" fill="#fff">H.R MOTO</text></svg>`;
+}
+const media = p => p.img.length ? `<img src="${p.img[0]}" alt="${p.name.en}" loading="lazy">` : art(p);
+const gallery = p => p.img.length > 1 ? p.img.map((u,i) => `<img class="slide${i?"":" on"}" src="${u}" alt="${p.name.en}" loading="lazy">`).join("") : media(p);
+
+/* ================= State ================= */
+const $ = s => document.querySelector(s), $$ = s => document.querySelectorAll(s);
+let lang = CONFIG.defaultLang, filter = "all", cart = [];
+try { lang = localStorage.getItem("hrmoto_lang") || lang; cart = JSON.parse(localStorage.getItem("hrmoto_cart") || "[]"); } catch(e){}
+const chosen = {};
+const t = k => T[lang][k];
+const fmt = n => `${n.toLocaleString("en-US")} ${t("cur")}`;
+const find = id => PRODUCTS.find(p => p.id === id);
+const findPack = id => PACKS.find(k => k.id === id);
+const packGloves = k => PRODUCTS.filter(p => p.cat === "gloves" && (!k.gloves.length || k.gloves.indexOf(p.id) > -1));
+const packG = {};   // chosen gloves per pack
+function packPrice(k, g){ const m = find(k.maskId); const full = g.price + m.price * k.masks; return {price: full - k.discount, old: full}; }
+/* resolve any cart line (product or pack) */
+function lineInfo(i){
+  if(typeof i.id === "string"){
+    const k = findPack(i.id), g = k && find(i.g), m = k && find(k.maskId);
+    if(!k || !g || !m) return null;
+    return {name:k.name[lang], price:packPrice(k,g).price, thumb:media(g),
+            detail:`${g.name[lang]}${i.s ? " (" + i.s + ")" : ""} + ${k.masks}× ${t("mask")}`};
+  }
+  const p = find(i.id); if(!p) return null;
+  return {name:p.name[lang], price:p.price, thumb:media(p), detail:i.s ? `${t("size")}: ${i.s}` : ""};
+}
+
+/* ================= Language ================= */
+function applyLang(){
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+  $("#langBtn").textContent = lang === "ar" ? "EN" : "عربي";
+  $$("[data-t]").forEach(e => e.innerHTML = t(e.dataset.t));
+  $$("[data-ph]").forEach(e => e.placeholder = t(e.dataset.ph));
+  // hero title word-by-word animation
+  const words = (t("h1a") + " – |" + t("h1b")).split(" ");
+  let i = 0;
+  $("#heroTitle").innerHTML = words.map(w => {
+    const accent = w.startsWith("|"); w = w.replace("|","");
+    return `<span class="w${accent||$("#heroTitle").dataset.acc?" ":""}" style="animation-delay:${.15 + i++*.08}s">${w}</span>`;
+  }).join(" ");
+  // color the second part
+  const spans = $("#heroTitle").querySelectorAll(".w"), cut = t("h1a").split(" ").length + 1;
+  spans.forEach((s,k) => { if(k >= cut) s.classList.add("grad"); });
+  // marquees (content doubled for seamless loop)
+  ["mq1","mq2","mq3"].forEach(id => { const h = t(id).concat(t(id)).map(x=>`<span>${x}</span>`).join(""); $("#"+id).innerHTML = h + h; });
+  renderGrid(); renderCart(); movePill();
+}
+
+/* ================= Products ================= */
+function packCard(k, i){
+  const opts = packGloves(k); if(!opts.length) return "";
+  if(!packG[k.id] || !find(packG[k.id])) packG[k.id] = opts[0].id;
+  const g = find(packG[k.id]), m = find(k.maskId), pr = packPrice(k, g);
+  if(g.sizes.length && g.sizes.indexOf(chosen[k.id]) < 0) chosen[k.id] = g.sizes[0];
+  return `<article class="card pack" data-card="${k.id}" style="animation-delay:${i*.08}s">
+    <div class="pic combo"><div class="half">${media(g)}</div><div class="half">${media(m)}${k.masks > 1 ? `<span class="times">×${k.masks}</span>` : ""}</div>
+      <span class="plus">+</span><span class="tag">${t("packTag")} -${k.discount} ${t("cur")}</span></div>
+    <div class="info">
+      <h3>${k.name[lang]}</h3>
+      <p>${k.desc[lang]}</p>
+      <label class="pick"><span>${t("pickGloves")}</span>
+        <select data-pack="${k.id}">${opts.map(o => `<option value="${o.id}" ${o.id===g.id?"selected":""}>${o.name[lang]}</option>`).join("")}</select></label>
+      <div class="price"><span class="now"><b>${pr.price}</b> ${t("cur")}</span><span class="old">${pr.old} ${t("cur")}</span></div>
+      <div class="save">${t("save")} ${k.discount} ${t("cur")} 🎉</div>
+      ${g.sizes.length ? `<div class="sizes" data-id="${k.id}">${g.sizes.map(z => `<button class="size ${chosen[k.id]===z?"on":""}" data-s="${z}">${z}</button>`).join("")}</div>` : ""}
+      <button class="add" data-add="${k.id}">${t("add")}</button>
+    </div></article>`;
+}
+function renderGrid(){
+  const packs = (filter === "all" || filter === "packs" || filter === "offers") ? PACKS.map((k,i) => packCard(k,i)).join("") : "";
+  const list = filter === "packs" ? [] : PRODUCTS.filter(p => filter === "all" || (filter === "offers" ? p.old : p.cat === filter));
+  const off0 = packs ? PACKS.length : 0;
+  $("#grid").innerHTML = (packs || list.length) ? packs + list.map((p,i) => { i += off0;
+    const off = p.old ? Math.round((1 - p.price / p.old) * 100) : 0;
+    if(p.sizes.length && !chosen[p.id]) chosen[p.id] = p.sizes[0];
+    return `<article class="card" style="animation-delay:${i*.08}s">
+      <div class="pic">${gallery(p)}${off ? `<span class="tag">-${off}%</span>` : ""}</div>
+      <div class="info">
+        <h3>${p.name[lang]}</h3>
+        <p>${p.desc[lang]}</p>
+        <div class="price"><span class="now"><b>${p.price}</b> ${t("cur")}</span>${p.old ? `<span class="old">${p.old} ${t("cur")}</span>` : ""}</div>
+        ${p.sizes.length ? `<div class="sizes" data-id="${p.id}">${p.sizes.map(s => `<button class="size ${chosen[p.id]===s?"on":""}" data-s="${s}">${s}</button>`).join("")}</div>` : ""}
+        <button class="add" data-add="${p.id}">${t("add")}</button>
+      </div></article>`;
+  }).join("") : `<div class="empty" style="grid-column:1/-1">${t("empty")}</div>`;
+  bindTilt();
+}
+
+/* 3D tilt + spotlight (desktop) */
+function bindTilt(){
+  if(!matchMedia("(pointer:fine)").matches) return;
+  $$(".card").forEach(c => {
+    c.onpointermove = e => {
+      const r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      c.style.transform = `perspective(800px) rotateY(${(x-.5)*10}deg) rotateX(${(.5-y)*10}deg) translateY(-4px)`;
+      c.style.setProperty("--mx", x*100 + "%"); c.style.setProperty("--my", y*100 + "%");
+    };
+    c.onpointerleave = () => c.style.transform = "";
+  });
+}
+
+/* ================= Tabs pill ================= */
+function movePill(){
+  const a = $(".tab.active"), pill = $("#pill");
+  if(!a) return;
+  pill.style.left = a.offsetLeft + "px"; pill.style.width = a.offsetWidth + "px";
+}
+
+/* ================= Cart ================= */
+function save(){ try{ localStorage.setItem("hrmoto_cart", JSON.stringify(cart)); }catch(e){} }
+const total = () => cart.reduce((s,i) => { const L = lineInfo(i); return s + (L ? L.price * i.q : 0); }, 0);
+function renderCart(bump){
+  cart = cart.filter(i => lineInfo(i));
+  const n = cart.reduce((s,i) => s + i.q, 0), c = $("#count");
+  c.textContent = n;
+  if(bump){ c.classList.remove("bump"); void c.offsetWidth; c.classList.add("bump"); }
+  $("#foot").style.display = n ? "" : "none";
+  $("#items").innerHTML = n ? cart.map((i,idx) => {
+    const L = lineInfo(i);
+    return `<div class="line" style="animation-delay:${idx*.05}s"><div class="th">${L.thumb}</div>
+      <div class="d"><b>${L.name}</b>${L.detail ? `<small>${L.detail}</small>` : ""}
+        <div class="qty"><button data-q="-1" data-i="${idx}">−</button><span>${i.q}</span><button data-q="1" data-i="${idx}">+</button></div></div>
+      <div class="lp">${fmt(L.price * i.q)}</div></div>`;
+  }).join("") : `<div class="empty">${t("cartEmpty")}</div>`;
+  $("#total").textContent = fmt(total());
+  save();
+}
+
+function flyToCart(fromEl){
+  const src = fromEl.getBoundingClientRect(), dst = $("#openCart").getBoundingClientRect();
+  const f = document.createElement("div"); f.className = "flyer";
+  const size = Math.min(src.width, 120);
+  Object.assign(f.style,{width:size+"px",height:size+"px",left:src.left+src.width/2-size/2+"px",top:src.top+src.height/2-size/2+"px"});
+  f.innerHTML = fromEl.innerHTML.replace(/<span class="tag".*?<\/span>/,"");
+  document.body.appendChild(f);
+  const dx = dst.left + dst.width/2 - (src.left + src.width/2), dy = dst.top + dst.height/2 - (src.top + src.height/2);
+  const anim = f.animate([
+    {transform:"translate(0,0) scale(1)",opacity:1},
+    {transform:`translate(${dx*.5}px,${dy*.5 - 80}px) scale(.6)`,opacity:1,offset:.5},
+    {transform:`translate(${dx}px,${dy}px) scale(.12)`,opacity:.4}
+  ],{duration:800,easing:"cubic-bezier(.5,0,.3,1)"});
+  anim.onfinish = () => { f.remove(); $("#openCart").classList.remove("shake"); void $("#openCart").offsetWidth; $("#openCart").classList.add("shake"); renderCart(true); };
+}
+
+function addToCart(id, btn){
+  const isPack = typeof id === "string";
+  const g = isPack ? find(packG[id]) : find(id), s = g.sizes.length ? chosen[id] : "";
+  const gid = isPack ? g.id : undefined;
+  const ex = cart.find(i => i.id === id && i.s === s && i.g === gid);
+  ex ? ex.q++ : cart.push(isPack ? {id, g:gid, s, q:1} : {id, s, q:1});
+  btn.classList.add("ok"); btn.textContent = t("added");
+  setTimeout(() => { btn.classList.remove("ok"); btn.textContent = t("add"); }, 1200);
+  if(matchMedia("(prefers-reduced-motion:reduce)").matches) renderCart(true);
+  else flyToCart(btn.closest(".card").querySelector(".pic"));
+  toast(t("toast"));
+}
+function toast(msg){ const e = $("#toast"); e.textContent = msg; e.classList.add("show"); clearTimeout(toast.h); toast.h = setTimeout(() => e.classList.remove("show"), 1600); }
+function openCart(o){ $("#drawer").classList.toggle("open",o); $("#overlay").classList.toggle("open",o); document.body.style.overflow = o ? "hidden" : ""; }
+
+/* ================= Events ================= */
+$("#tabs").addEventListener("click", e => {
+  const b = e.target.closest(".tab"); if(!b) return;
+  filter = b.dataset.f;
+  $$(".tab").forEach(x => x.classList.toggle("active", x === b));
+  movePill(); renderGrid();
+});
+$("#grid").addEventListener("click", e => {
+  const s = e.target.closest(".size");
+  if(s){ const id = s.parentElement.dataset.id; chosen[id] = s.dataset.s; s.parentElement.querySelectorAll(".size").forEach(x => x.classList.toggle("on", x === s)); return; }
+  const a = e.target.closest("[data-add]"); if(a){ const v = a.dataset.add; addToCart(isNaN(v) ? v : +v, a); }
+});
+$("#grid").addEventListener("change", e => {
+  const sel = e.target.closest("[data-pack]"); if(!sel) return;
+  const k = findPack(sel.dataset.pack); packG[k.id] = +sel.value;
+  const card = sel.closest(".card"), tmp = document.createElement("div");
+  tmp.innerHTML = packCard(k, 0); const nc = tmp.firstElementChild; nc.style.animation = "none";
+  card.replaceWith(nc); nc.querySelector(".combo").classList.add("swap"); bindTilt();
+});
+$("#items").addEventListener("click", e => {
+  const b = e.target.closest("[data-q]"); if(!b) return;
+  const i = cart[+b.dataset.i]; i.q += +b.dataset.q;
+  if(i.q <= 0) cart.splice(+b.dataset.i, 1);
+  renderCart(true);
+});
+$("#openCart").onclick = () => openCart(true);
+$("#closeCart").onclick = $("#overlay").onclick = () => openCart(false);
+$("#langBtn").onclick = () => { lang = lang === "en" ? "ar" : "en"; try{ localStorage.setItem("hrmoto_lang", lang); }catch(e){} applyLang(); };
+
+$("#orderBtn").onclick = () => {
+  const f = {name:$("#fName"), phone:$("#fPhone"), city:$("#fCity")};
+  let bad = false;
+  Object.values(f).forEach(el => { const miss = !el.value.trim(); el.classList.toggle("err", miss); bad = bad || miss; });
+  if(!cart.length) return;
+  if(bad){ toast(t("fill")); return; }
+  let m = t("msgHead") + "\n\n";
+  cart.forEach(i => { const L = lineInfo(i); m += `• ${L.name}${L.detail ? ` [${L.detail}]` : ""} × ${i.q} = ${fmt(L.price * i.q)}\n`; });
+  const addr = $("#fAddr").value.trim();
+  m += `\n💰 *${t("msgTotal")}:* ${fmt(total())}\n${t("msgDel")}\n${t("msgPay")}\n\n👤 ${f.name.value.trim()}\n📞 ${f.phone.value.trim()}\n📍 ${f.city.value.trim()}${addr ? " — " + addr : ""}`;
+  window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(m)}`, "_blank");
+};
+
+/* scroll: header, progress bar */
+addEventListener("scroll", () => {
+  const y = scrollY, h = document.documentElement.scrollHeight - innerHeight;
+  $("#hdr").classList.toggle("scrolled", y > 10);
+  $("#progress").style.transform = `scaleX(${h > 0 ? y / h : 0})`;
+}, {passive:true});
+addEventListener("resize", movePill);
+
+/* reveal on scroll */
+const io = !("IntersectionObserver" in window) ? {observe: el => el.classList.add("in"), unobserve(){}} : new IntersectionObserver(es => es.forEach(en => {
+  if(en.isIntersecting){
+    const sib = [...en.target.parentElement.children].filter(x => x.classList.contains("reveal"));
+    en.target.style.transitionDelay = (Math.max(0, sib.indexOf(en.target)) * .1) + "s";
+    en.target.classList.add("in"); io.unobserve(en.target);
+  }
+}), {threshold:.15});
+$$(".reveal").forEach(el => io.observe(el));
+
+/* speed lines in hero */
+const lines = $("#lines");
+for(let i = 0; i < 9; i++){
+  const l = document.createElement("i");
+  l.style.top = (8 + Math.random()*84) + "%";
+  l.style.width = (60 + Math.random()*140) + "px";
+  l.style.animationDuration = (1.6 + Math.random()*2.4) + "s";
+  l.style.animationDelay = (Math.random()*3) + "s";
+  lines.appendChild(l);
+}
+
+/* hero visual */
+const heroP = PRODUCTS[0], heroB = PRODUCTS[1] || PRODUCTS[0];
+$("#heroMain").innerHTML = CONFIG.heroImg ? `<img src="${CONFIG.heroImg}" alt="H.R MOTO">` : media(heroP);
+$("#heroBack").innerHTML = CONFIG.heroImg2 ? `<img src="${CONFIG.heroImg2}" alt="">` : media(heroB);
+if(matchMedia("(pointer:fine)").matches){
+  $(".hero").addEventListener("pointermove", e => {
+    const x = e.clientX / innerWidth - .5, y = e.clientY / innerHeight - .5;
+    $("#visual").style.transform = `translate(${x*-20}px,${y*-20}px)`;
+  });
+}
+
+/* product photo slideshow */
+setInterval(() => $$(".pic").forEach(pic => {
+  const sl = pic.querySelectorAll(".slide"); if(sl.length < 2) return;
+  const i = [...sl].findIndex(x => x.classList.contains("on"));
+  sl[i].classList.remove("on"); sl[(i+1) % sl.length].classList.add("on");
+}), 2800);
+
+/* links + init */
+$("#lnkTik").href = CONFIG.tiktok;
+$("#lnkIg").href = CONFIG.instagram;
+$("#lnkWa").href = $("#fabWa").href = $("#heroWa").href = `https://wa.me/${CONFIG.whatsapp}`;
+$("#yr").textContent = new Date().getFullYear();
+applyLang();
+const hideLoader = () => $("#loader").classList.add("done");
+addEventListener("load", () => setTimeout(hideLoader, 400));
+setTimeout(hideLoader, 2500);
+</script>
 </body>
 </html>
